@@ -23,27 +23,25 @@ const CONFIG =
 (function() {
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.querySelector('.main-nav');
-    
-    if (menuToggle && mainNav) {
-        menuToggle.addEventListener('click', () => {
-            const isOpen = mainNav.classList.toggle('is-open');
-            menuToggle.classList.toggle('is-active', isOpen);
-            menuToggle.setAttribute('aria-expanded', isOpen);
-            
-            // Prevent background scrolling when full-screen menu is open
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        });
+    if (!menuToggle || !mainNav) return;
 
-        // Automatically close menu & restore scrolling when a link is clicked
-        mainNav.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('is-open');
-                menuToggle.classList.remove('is-active');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            });
-        });
+    function setMenu(open) {
+        mainNav.classList.toggle('is-open', open);
+        menuToggle.classList.toggle('is-active', open);
+        menuToggle.setAttribute('aria-expanded', String(open));
+        document.body.style.overflow = open ? 'hidden' : '';        // lock the page behind the full-screen menu
+        if (open) mainNav.scrollTop = 0;                             // always start at the top of the menu
     }
+
+    menuToggle.addEventListener('click', () => setMenu(!mainNav.classList.contains('is-open')));
+
+    // Close the menu (and unlock scrolling) when a link is clicked
+    mainNav.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => setMenu(false)));
+
+    // Escape closes it, and so does turning the phone / resizing to a wide screen
+    // (otherwise the page could stay locked with overflow:hidden)
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 950) setMenu(false); });
 })();
 
 
