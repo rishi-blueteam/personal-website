@@ -891,3 +891,27 @@
 }
 @media (prefers-reduced-motion: reduce) { .wr-slide { transition: none; } }
 
+
+/* =========================================================
+   MOBILE MENU FIX: the opened menu can scroll when it is taller than the screen
+   (paste at the very BOTTOM of css/home.css, it must come after the existing menu rules)
+   ========================================================= */
+@media (max-width: 950px) {
+    .main-nav {
+        height: 100vh !important;
+        height: 100dvh !important;                 /* the really visible height on phones (the browser's address bar no longer hides the bottom) */
+        max-height: 100dvh !important;
+        justify-content: flex-start !important;    /* "center" makes a too-tall menu overflow at the top AND bottom, and the top part can never be scrolled to */
+        padding: 76px 20px calc(36px + env(safe-area-inset-bottom)) !important;
+        overflow-y: auto !important;
+        overscroll-behavior: contain !important;   /* scrolling the menu never scrolls the page behind it */
+        -webkit-overflow-scrolling: touch;
+    }
+    .main-nav > .nav-link:first-child { margin-top: auto !important; }      /* menu fits: it stays centred like before... */
+    .main-nav > .nav-link:last-child  { margin-bottom: auto !important; }   /* ...menu does not fit: it starts at the top and scrolls */
+    .main-nav .nav-link {
+        flex: 0 0 auto !important;                 /* style.css gives links "flex: 1", which squashes them to share the screen height instead of letting the menu scroll */
+        height: auto !important;
+        min-height: 46px;
+    }
+}
