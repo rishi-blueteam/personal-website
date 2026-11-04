@@ -1,0 +1,184 @@
+/* =========================================================
+   CERTIFICATIONS PAGE (only this page). Menu lives in style.css / home.css.
+   1. Page + background  2. Cards  3. Buttons  4. Popup (overlay + dialog)  5. Responsive
+   ========================================================= */
+
+/* ---------- 1. PAGE + BACKGROUND ---------- */
+/* plain black background on this page (no GIF) */
+body[data-page="certifications"] .site-bg { background-image: none; background-color: #050505; }
+body[data-page="certifications"] .site-bg::after { display: none; }
+
+.cert-page { padding: 120px 28px 90px; }
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    width: min(100%, var(--content-width, 1180px));
+    margin: 48px auto 0;
+}
+
+/* ---------- 2. CARDS ---------- */
+.cert-card {
+    display: flex; flex-direction: column;
+    background: rgba(6, 12, 9, .92);
+    border: 2px solid #eae857;
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: "Courier New", monospace;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.cert-card:hover { transform: translateY(-4px); border-color: #d4f64b; box-shadow: 0 10px 28px rgba(0, 232, 91, .15); }
+.cert-card.is-active { border-color: var(--green, #d4e933); box-shadow: 0 0 24px rgba(0, 232, 91, .3); }
+
+.cert-media {
+    position: relative; aspect-ratio: 16 / 9; cursor: pointer;
+    background: linear-gradient(135deg, #0b2a1a, #0e3b5a);
+    display: flex; align-items: center; justify-content: center;
+}
+.cert-noimg { position: absolute; color: #6f8f7d; font-size: 12px; letter-spacing: 1px; }
+.cert-media { overflow: hidden; }
+.cert-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.cert-body { display: flex; flex-direction: column; flex: 1; gap: 10px; padding: 20px; }
+.cert-title { margin: 0; color: #fff; font-size: 18px; line-height: 1.35; }
+.cert-date  { margin: 0; color: #8793a0; font-size: 13px; }
+.cert-date b { color: #d6e2d9; }
+.cert-desc  { margin: 0 0 8px; color: #d6e2d9; font-size: 14px; line-height: 1.7; flex: 1; }
+.cert-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- 3. BUTTONS ---------- */
+.cert-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 8px;
+    border: 1px solid var(--green, #00e85b); background: transparent; color: var(--green, #00e85b);
+    font: 14px "Courier New", monospace; cursor: pointer; transition: all .2s ease;
+}
+.cert-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cert-btn:hover { background: var(--green, #00e85b); color: #04140a; }
+.cert-btn.primary { background: var(--green, #00e85b); color: #04140a; font-weight: 700; }
+.cert-btn.primary:hover { background: #fff; border-color: #fff; }
+
+/* ---------- 4. POPUP ---------- */
+.cm-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    display: none; align-items: center; justify-content: center; gap: 18px;
+    padding: 20px;
+    background: rgba(0, 0, 0, .55);
+    -webkit-backdrop-filter: grayscale(1) blur(3px);
+            backdrop-filter: grayscale(1) blur(3px);     /* everything behind turns grey */
+}
+.cm-overlay.is-open { display: flex; }
+
+.cm-dialog {
+    position: relative; outline: none;
+    width: min(980px, 92vw); max-height: 88vh; overflow: auto;
+    background: #050a07; border: 1px solid var(--green, #00e85b); border-radius: 18px;
+    box-shadow: 0 0 40px rgba(0, 232, 91, .25);
+    transform-origin: 0 0;                                /* used by the grow-from-card animation */
+    font-family: "Courier New", monospace;
+}
+.cm-content { display: grid; grid-template-columns: 1.15fr 1fr; }
+.cm-media { background: #000; display: flex; align-items: center; justify-content: center; padding: 18px; }
+.cm-media img { max-width: 100%; max-height: 70vh; object-fit: contain; border-radius: 8px; }
+.cm-info { display: flex; flex-direction: column; gap: 14px; padding: 30px 28px; }
+.cm-count { margin: 0; color: #6f8f7d; font-size: 12px; letter-spacing: 2px; }
+.cm-title { margin: 0; color: #fff; font-size: clamp(18px, 2vw, 24px); line-height: 1.35; }
+.cm-date  { margin: 0; color: #8793a0; font-size: 13px; }
+.cm-date b { color: #d6e2d9; }
+.cm-details { margin: 0; color: #d6e2d9; font-size: 14px; line-height: 1.8; }
+
+/* concept / skill circles (only shown in the popup) */
+.cm-skills { display: flex; flex-wrap: wrap; gap: 10px; }
+.cm-skills span {
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(0, 232, 91, .1); border: 1px solid #2f7a4a; color: #cfe9d8; font-size: 12px;
+}
+.cm-info .cert-btn { width: fit-content; margin-top: 6px; }
+
+.cm-close {
+    position: absolute; top: 12px; right: 12px; z-index: 3;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(5, 5, 5, .85); border: 1px solid #555; color: #fff; font-size: 18px; cursor: pointer;
+}
+.cm-close:hover { border-color: var(--green, #00e85b); color: var(--green, #00e85b); }
+
+.cm-arrow {
+    flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%;
+    background: rgba(5, 5, 5, .9); border: 1px solid var(--green, #00e85b); color: var(--green, #00e85b);
+    font: 700 20px "Courier New", monospace; cursor: pointer; transition: all .2s ease;
+}
+.cm-arrow:hover { background: var(--green, #00e85b); color: #04140a; }
+
+/* ---------- 5. RESPONSIVE ---------- */
+@media (max-width: 1050px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) {
+    .cm-content { grid-template-columns: 1fr; }
+    .cm-media img { max-height: 40vh; }
+    .cm-arrow { position: fixed; bottom: 18px; z-index: 2; }
+    .cm-prev { left: 18px; }
+    .cm-next { right: 18px; }
+    .cm-dialog { max-height: 80vh; margin-bottom: 52px; }
+}
+@media (max-width: 700px) { .cert-grid { grid-template-columns: 1fr; } .cert-page { padding: 100px 18px 70px; } }
+
+/* ---------- ORGANIZATION LINE (card + popup) ---------- */
+.cert-org, .cm-org { margin: 0; color: #8793a0; font-size: 13px; }
+.cert-org b, .cm-org b { color: #d6e2d9; }
+.cert-org span, .cm-org span { color: var(--green, #00e85b); }
+
+/* =========================================================
+   FILTER (Completed / Pursuing), STATUS BADGE, EMPTY STATE, IN-PROGRESS NOTICE
+   ========================================================= */
+.cert-filter { display: flex; gap: 10px; width: min(100%, var(--content-width, 1180px)); margin: 40px auto 0; }
+.cert-filter + .cert-grid { margin-top: 26px; }
+.cf-btn {
+    padding: 8px 18px; border-radius: 999px; border: 1px solid #2c4a37; background: transparent;
+    color: #a8b2c2; font: 14px "Courier New", monospace; cursor: pointer; transition: all .2s ease;
+}
+.cf-btn:hover { color: #fff; border-color: var(--green, #00e85b); }
+.cf-btn.is-active { background: var(--green, #00e85b); border-color: var(--green, #00e85b); color: #04140a; font-weight: 700; }
+.cf-count { margin-left: 4px; opacity: .8; }
+
+/* COMPLETED / IN PROGRESS badge on the card image */
+.cert-status {
+    position: absolute; top: 12px; left: 12px; z-index: 2;
+    padding: 4px 10px; border-radius: 999px;
+    font: 700 11px "Courier New", monospace; letter-spacing: 1px;
+}
+.cert-status.done { background: rgba(0, 232, 91, .92); color: #04140a; }
+.cert-status.pursuing { background: #ffca70; color: #2a1c00; }
+
+/* pursuing cards look slightly muted with an amber accent */
+.cert-card.is-pursuing { border-color: #5a4a1a; }
+.cert-card.is-pursuing:hover { border-color: #ffca70; box-shadow: 0 10px 28px rgba(255, 202, 112, .14); }
+.cert-card.is-pursuing .cert-media img { filter: grayscale(.6) brightness(.7); }
+
+/* empty filter message */
+.cert-empty {
+    grid-column: 1 / -1; padding: 60px 20px; text-align: center;
+    color: #8793a0; font: 16px "Courier New", monospace;
+    border: 1px dashed #2c4a37; border-radius: 16px;
+}
+
+/* hide the arrows in the details popup when only one card is in the filter */
+.cm-overlay.single .cm-arrow { display: none; }
+
+/* "still in progress" popup (phone + laptop) */
+.cn-overlay {
+    position: fixed; inset: 0; z-index: 2100;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+    background: rgba(0, 0, 0, .6);
+    -webkit-backdrop-filter: grayscale(1) blur(3px);
+            backdrop-filter: grayscale(1) blur(3px);
+}
+.cn-overlay.is-open { display: flex; }
+.cn-dialog {
+    width: min(440px, 92vw); padding: 32px 28px; text-align: center; outline: none;
+    background: #050a07; border: 1px solid #ffca70; border-radius: 18px;
+    box-shadow: 0 0 36px rgba(255, 202, 112, .2);
+    font-family: "Courier New", monospace;
+}
+.cn-icon svg { width: 46px; height: 46px; fill: none; stroke: #ffca70; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.cn-dialog h3 { margin: 14px 0 10px; color: #fff; font-size: 20px; }
+.cn-msg { margin: 0 0 22px; color: #d6e2d9; font-size: 14px; line-height: 1.7; }
+.cn-msg b { color: var(--green, #00e85b); }

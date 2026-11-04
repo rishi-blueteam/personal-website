@@ -1,0 +1,67 @@
+/* =========================================================
+   SKILLS PAGE (only this page). Menu lives in style.css / home.css.
+   1 Page  2 Header  3 Card grid  4 Card parts  5 Responsive
+   The background is the shared site background (same as the other pages).
+   ========================================================= */
+:root { --sk-green: #19e868; --sk-glow: rgba(0, 232, 91, .22); }
+
+/* ---------- 1. PAGE ---------- */
+.sk-page { padding: 120px 28px 90px; }
+
+/* ---------- 2. HEADER ---------- */
+.sk-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; width: min(100%, var(--content-width, 1180px)); margin: 0 auto; }
+.sk-head-text { min-width: 0; }
+.sk-desc { margin: 18px 0 0; padding-left: 16px; border-left: 3px solid var(--sk-green); max-width: 640px; }
+.sk-flow {
+    flex-shrink: 0; margin-top: 24px; padding: 12px 20px; border: 1px solid var(--sk-green); border-radius: 8px;
+    background: rgba(0, 232, 91, .06); box-shadow: 0 0 16px var(--sk-glow); color: #bff5d3;
+    font: 13px "Courier New", monospace; letter-spacing: 2px; white-space: nowrap;
+}
+.sk-flow span { margin: 0 6px; color: var(--sk-green); }
+
+/* ---------- 3. CARD GRID ---------- */
+.sk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; width: min(100%, var(--content-width, 1180px)); margin: 48px auto 0; }
+
+/* ---------- 4. CARD PARTS ---------- */
+.sk-card {
+    position: relative; display: flex; flex-direction: column; gap: 16px; overflow: hidden; padding: 22px;
+    border: 1.5px solid rgba(25, 232, 104, .75); border-radius: 14px;
+    background: rgba(2, 14, 9, .86);
+    box-shadow: 0 0 18px var(--sk-glow), inset 0 0 26px rgba(0, 232, 91, .05);
+    font-family: "Courier New", monospace;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, opacity .6s ease;
+}
+.sk-card:hover { transform: translateY(-4px); border-color: #7dffa8; box-shadow: 0 0 30px rgba(0, 232, 91, .4), inset 0 0 26px rgba(0, 232, 91, .08); }
+.sk-card.is-pending { opacity: 0; transform: translateY(24px); }      /* waiting to scroll into view */
+
+.sk-top { position: relative; z-index: 1; display: flex; align-items: center; gap: 14px; }
+.sk-tile {
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 10px;
+    background: rgba(0, 232, 91, .1); border: 1px solid rgba(25, 232, 104, .6); box-shadow: 0 0 12px rgba(0, 232, 91, .25);
+}
+.sk-tile svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.sk-title { margin: 0; color: #fff; font-size: 17px; line-height: 1.3; }
+.sk-sub { margin: 4px 0 0; color: #a8b8ae; font-size: 12.5px; line-height: 1.5; }
+
+.sk-chips { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.sk-chips li {
+    padding: 5px 13px; border-radius: 999px; border: 1px solid #2e86c1; color: #e8f4ff; font-size: 12px;
+    background: linear-gradient(#0e3a66, #0a2a4c); transition: border-color .2s, transform .2s;
+}
+.sk-chips li:hover { border-color: #8fd0ff; transform: translateY(-1px); }
+
+.sk-link { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; width: fit-content; margin-top: auto; padding-top: 4px; color: var(--sk-green); font-size: 13px; text-decoration: none; }
+.sk-link svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sk-link .arrow { transition: transform .2s; }
+.sk-link:hover { color: #fff; }
+.sk-link:hover .arrow { transform: translateX(5px); }
+.sk-link:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 4px; }
+
+/* faint large icon in the bottom-right corner */
+.sk-mark { position: absolute; right: 14px; bottom: 10px; z-index: 0; width: 86px; height: 86px; fill: none; stroke: rgba(0, 232, 91, .16); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+
+/* ---------- 5. RESPONSIVE ---------- */
+@media (max-width: 1000px) { .sk-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 800px)  { .sk-head { flex-direction: column; } .sk-flow { margin-top: 0; } }
+@media (max-width: 650px)  { .sk-page { padding: 100px 18px 70px; } .sk-grid { grid-template-columns: 1fr; margin-top: 34px; } .sk-flow { white-space: normal; } }
+@media (prefers-reduced-motion: reduce) { .sk-card { transition: none; } .sk-card.is-pending { opacity: 1; transform: none; } }

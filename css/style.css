@@ -1,0 +1,651 @@
+/* Shared styles: theme variables */
+:root {
+    --background: #050505;
+    --green: #00e85b;
+    --text: #f4f4f4;
+    --muted: #a8b2c2;
+    --header-height: 132px;
+    --content-width: 1180px
+}
+
+* {
+    box-sizing: border-box
+}
+
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: "Courier New", monospace
+}
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+button {
+    font: inherit
+}
+
+/* ---------- SNEAKY/CLEAN HEADER STYLING OVERRIDES FOR HOME PAGE ---------- */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background: rgba(5, 5, 5, 0.95);
+    border-bottom: 1px solid #11331c;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Brand & Blinking Dot Fix */
+.brand {
+    font-family: "Courier New", monospace;
+    font-weight: 700;
+    color: var(--green, #00e85b);
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.brand-dot {
+    animation: blinkDot 1s steps(1) infinite;
+}
+@keyframes blinkDot {
+    50% { opacity: 0; }
+}
+
+/* Nav Bar Layout */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--green, #00e85b);
+}
+
+
+/* ---------- 1. BASE NAV STYLES (Desktop default) ---------- */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Ensure clicks pass through SVG icons directly to the button */
+.menu-toggle svg {
+    pointer-events: none;
+}
+
+/* ---------- 2. MOBILE HAMBURGER & OVERLAY STYLES ---------- */
+.menu-toggle {
+    display: none;
+    background: #050505;
+    border: 1px solid #11331c;
+    color: var(--green);
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    z-index: 1002;
+}
+
+.menu-toggle .icon-close { display: none; }
+.menu-toggle .icon-hamburger { display: block; }
+
+.menu-toggle.is-active .icon-hamburger { display: none; }
+.menu-toggle.is-active .icon-close { display: block; }
+
+@media(max-width: 950px) {
+    .menu-toggle {
+        display: flex !important;
+    }
+
+    .header-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 0 16px !important;
+    }
+
+    .brand {
+        margin: 0 !important;
+    }
+
+    .header-clock {
+        display: none !important;
+    }
+
+    /* FULL-SCREEN OVERLAY MENU - Hidden by default */
+    .main-nav {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #050505 !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 16px !important;
+        padding: 80px 20px 20px !important;
+        display: none !important; 
+        z-index: 1001 !important;
+        overflow-y: auto !important;
+    }
+
+    /* Shown only when JavaScript adds .is-open */
+    .main-nav.is-open {
+        display: flex !important; 
+    }
+
+    .nav-link {
+        font-size: 15px;
+        width: 100%;
+        max-width: 280px;
+        padding: 10px 14px;
+        background: #090d0a;
+        border: 1px solid #112215;
+        border-radius: 6px;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .nav-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+
+
+/* Proportional Small Icon Sizing */
+.nav-icon {
+    width: 25px !important;
+    height: 25px !important;
+    min-width: 16px;
+    min-height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Live Clock Styling */
+.header-clock {
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    color: var(--green, #00e85b);
+    letter-spacing: 1px;
+}
+
+.nav-link:hover svg,
+.nav-link.active svg {
+    color: var(--green);
+    transform: translateY(-2px)
+}
+
+.contact-nav .chat-pulse {
+    position: absolute;
+    top: 37px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    pointer-events: none
+}
+
+.chat-pulse i {
+    width: 3px;
+    height: 3px;
+    background: #080808;
+    border-radius: 50%;
+    animation: chatBounce .62s ease-in-out infinite
+}
+
+.chat-pulse i:nth-child(2) {
+    animation-delay: .12s
+}
+
+.chat-pulse i:nth-child(3) {
+    animation-delay: .24s
+}
+
+/* Landing layout: two terminal panels fitted to the viewport */
+.landing-screen {
+    min-height: 100svh;
+    padding: calc(var(--header-height) + 26px) clamp(22px, 4vw, 70px) 24px;
+    display: grid;
+    grid-template-columns: minmax(300px, .92fr) minmax(440px, 1.25fr);
+    align-items: center;
+    gap: clamp(30px, 4vw, 72px)
+}
+
+.soc-panel {
+    width: 100%;
+    max-width: 620px;
+    justify-self: end;
+    border: 1px solid #20272b;
+    background: linear-gradient(145deg, #080d10, #050606 70%);
+    box-shadow: 0 0 25px rgba(0, 150, 255, .035)
+}
+
+.panel-heading {
+    padding: 13px 15px;
+    border-bottom: 1px solid #20272b;
+    color: #b7c6d2;
+    font: 11px Arial, sans-serif;
+    letter-spacing: 1.4px;
+    display: flex;
+    align-items: center;
+    gap: 9px
+}
+
+.panel-led {
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 9px var(--green)
+}
+
+.panel-tag {
+    margin-left: auto;
+    color: #6a9db6;
+    font-size: 9px
+}
+
+.soc-console {
+    padding: 14px 15px 8px;
+    font-size: clamp(10px, .78vw, 12px);
+    line-height: 1.65;
+    overflow-wrap: anywhere
+}
+
+.soc-console p {
+    margin: 0 0 8px;
+    color: #d4dce2
+}
+
+.dim {
+    color: #71808a !important
+}
+
+.blue {
+    color: #58c7ff !important
+}
+
+.warn {
+    color: #ffca70 !important
+}
+
+.command {
+    color: #e7edf1 !important
+}
+
+.success {
+    color: var(--green) !important
+}
+
+.panel-footnote {
+    margin: 0;
+    padding: 10px 15px 13px;
+    border-top: 1px solid #171f23;
+    color: #68757d;
+    font: 10px Arial, sans-serif;
+    letter-spacing: .3px
+}
+
+.console-cursor {
+    color: #58c7ff;
+    animation: blink .85s steps(2, start) infinite
+}
+
+.welcome-panel {
+    width: 100%;
+    max-width: 760px;
+    justify-self: start;
+    position: relative;
+    padding-bottom: 10px
+}
+
+.terminal {
+    width: 100%;
+    font-size: clamp(16px, 1.25vw, 22px);
+    line-height: 1.5;
+    letter-spacing: .3px
+}
+
+.terminal-line {
+    color: var(--green);
+    min-height: 1.5em;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin: 0 0 13px
+}
+
+.prompt {
+    color: var(--green);
+    margin-right: 5px
+}
+
+.terminal-loading {
+    display: none;
+    margin-top: 20px;
+    color: #d4e2f3;
+    min-height: 1.5em;
+    white-space: pre-wrap
+}
+
+.terminal-loading.visible {
+    display: block
+}
+
+.terminal-welcome {
+    display: none;
+    color: var(--green);
+    min-height: 1.5em;
+    margin: 24px 0 0
+}
+
+.terminal-welcome.visible {
+    display: block
+}
+
+.terminal-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    color: var(--green);
+    animation: blink .85s steps(2, start) infinite
+}
+
+.open-profile-button {
+    margin: 26px 0 0;
+    padding: 10px 20px;
+    background: #050505;
+    border: 1px solid #666;
+    outline: 1px solid #282828;
+    outline-offset: 3px;
+    color: #fff;
+    font: 23px Georgia, serif;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: none
+}
+
+.open-profile-button.visible {
+    display: inline-block;
+    animation: buttonReveal .4s ease both
+}
+
+.open-profile-button:hover {
+    color: var(--green);
+    border-color: var(--green);
+    background: #0a0f0b
+}
+
+.landing-hint {
+    color: #8793a0;
+    font: 12px Arial, sans-serif;
+    min-height: 1.2em;
+    margin: 14px 0 0
+}
+
+.skip-intro {
+    position: absolute;
+    bottom: -25px;
+    right: 0;
+    background: transparent;
+    border: 0;
+    color: #737373;
+    font-size: 11px;
+    cursor: pointer
+}
+
+.skip-intro:hover {
+    color: var(--green)
+}
+
+/* Individual pages share this base layout */
+.content-page {
+    min-height: 100svh;
+    padding: calc(var(--header-height) + 65px) 28px 80px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #111
+}
+
+.section-shell {
+    width: min(100%, var(--content-width));
+    margin: auto
+}
+
+.eyebrow {
+    color: var(--green);
+    letter-spacing: 2px;
+    font-size: 13px
+}
+
+.status-light {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--green)
+}
+
+h1 {
+    margin: 18px 0;
+    font-weight: 500;
+    font-size: clamp(38px, 6vw, 72px)
+}
+
+.lead {
+    color: #e0e0e0;
+    font-size: clamp(17px, 2vw, 23px)
+}
+
+.muted {
+    max-width: 720px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 16px
+}
+
+.page-terminal {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 18px;
+    background: #090d0a;
+    border: 1px solid #1b2a1e;
+    color: #c9d7ce;
+    font-size: 14px
+}
+
+@keyframes blink {
+    to {
+        visibility: hidden
+    }
+}
+
+@keyframes chatBounce {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0)
+    }
+
+    30% {
+        transform: translateY(-4px)
+    }
+}
+
+@keyframes buttonReveal {
+    from {
+        opacity: 0;
+        transform: translateY(7px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@media(max-width:1050px) {
+    :root {
+        --header-height: 124px
+    }
+
+    .header-inner {
+        gap: 26px;
+        padding-inline: 18px
+    }
+
+    .brand {
+        font-size: 24px
+    }
+
+    .main-nav {
+        gap: 15px
+    }
+
+    .nav-link {
+        min-width: 68px;
+        font-size: 12px
+    }
+
+    .nav-link svg {
+        width: 37px;
+        height: 37px
+    }
+
+    .landing-screen {
+        grid-template-columns: minmax(250px, .9fr) minmax(370px, 1.1fr);
+        gap: 26px
+    }
+
+    .soc-console {
+        font-size: 10px
+    }
+}
+
+@media(max-width:760px) {
+    :root {
+        --header-height: 125px
+    }
+
+    .header-inner {
+        flex-direction: column;
+        gap: 1px;
+        justify-content: center;
+        padding: 5px 7px
+    }
+
+    .brand {
+        font-size: 19px
+    }
+
+    .main-nav {
+        width: 100%;
+        justify-content: space-around;
+        gap: 2px
+    }
+
+    .nav-link {
+        min-width: 0;
+        flex: 1;
+        height: 73px;
+        gap: 3px;
+        font-size: 9px
+    }
+
+    .nav-link svg {
+        width: 28px;
+        height: 28px
+    }
+
+    .contact-nav .chat-pulse {
+        top: 25px
+    }
+
+    .landing-screen {
+        grid-template-columns: 1fr;
+        padding: calc(var(--header-height) + 25px) 18px 42px;
+        gap: 28px;
+        align-items: start
+    }
+
+    .soc-panel,
+    .welcome-panel {
+        justify-self: center;
+        max-width: 620px
+    }
+
+    .soc-console {
+        font-size: 11px
+    }
+
+    .terminal {
+        font-size: 16px
+    }
+
+    .open-profile-button {
+        font-size: 20px
+    }
+
+    .content-page {
+        padding: calc(var(--header-height) + 45px) 20px 60px
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important
+    }
+}

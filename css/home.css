@@ -1,0 +1,893 @@
+/* =========================================================
+   HOME PAGE STYLES (only this page). Menu lives in style.css.
+   Sections in this file:
+   0. Variables  1. Hero background  2. Name + role
+   3. Terminal frame/window  4. Terminal text + CV button
+   5. Other sections (placeholders)  6. Responsive
+   ========================================================= */
+
+/* ---------- 0. VARIABLES ---------- */
+:root {
+    /* >>> PUT YOUR BACKGROUND GIF HERE, e.g. url("../assets/background.gif") <<< */
+    --hero-bg: url("../assets/your-background.gif");
+    --site-bg: url("../assets/your-background1.gif");  /* all sections below */
+    --hero-fallback: blue;          /* temporary colour until the GIF is added */
+    --frame-green: #11a63f;            /* green frame behind the terminal */
+    --term-width: 900px;
+}
+
+
+/* ---------- FADE: hero background dissolves into the shared background ---------- */
+.hero-bg {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);
+}
+
+/* ---------- SECTIONS FADE IN AS YOU SCROLL ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .9s ease, transform .9s ease;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------- SHARED BACKGROUND FOR THE WHOLE PAGE ---------- */
+.site-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;                          /* sits behind everything */
+    background-color: #050505;
+    background-image: var(--site-bg);     /* same variable you already set at the top */
+    background-size: cover;
+    background-position: center;
+}
+.site-bg::after {                         /* dark overlay so text stays readable */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .90);       /* CHANGED: Raised from .55 to .80 to make it darker */
+}
+
+
+
+/* ==========================================
+   SECTION 1: HERO Section (full-screen background + name + role)
+   ========================================== */
+.hero {
+    position: relative;
+    min-height: 100svh;
+    padding: calc(var(--header-height) + 60px) 24px 70px;
+    display: flex;
+    justify-content: center;
+    scroll-margin-top: var(--header-height);
+}
+.hero-bg {
+    position: absolute;
+    opacity: 70%;
+    inset: 0;
+    z-index: 0;
+    background-color: var(--hero-fallback);
+    background-image: var(--hero-bg);
+    background-size: cover;
+    background-position: center;
+}
+.hero-bg::after {                      /* dark overlay so text stays readable */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+}
+.hero-content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 1100px);
+    text-align: center;
+}
+
+/* ---------- 2. NAME + ROLE ---------- */
+.hero-name {
+    margin: 40px 0 0;
+    color: var(--green);
+    font: 800 clamp(34px, 7.4vw, 92px) "Montserrat", "Arial Black", Arial, sans-serif;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+.hero-role {
+    margin: 40px 0 0;
+    color: #fff;
+    font: 700 clamp(14px, 2vw, 24px) Arial, sans-serif;
+}
+
+/* ---------- CLEAN TERMINAL FRAME WITH THIN ROUNDED BORDER ---------- */
+.terminal-frame {
+    position: relative;
+    width: min(100%, var(--term-width));
+    margin: 90px auto 0;
+    text-align: left;
+}
+
+/* Remove the old ::before block entirely so it doesn't fill solid green */
+.terminal-frame::before {
+    display: none; 
+}
+
+.term-window {
+    position: relative;
+    background: #000;
+    /* This creates a crisp, thin green border with rounded corners */
+    border: 2px solid var(--frame-green);
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(0, 232, 91, 0.2); /* Soft professional neon glow */
+    min-height: 330px;
+}
+
+.term-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.dot-red    { background: #ff453a; }
+.dot-yellow { background: #ffe27a; }
+.dot-green  { background: #00c845; }
+
+.term-status {                          /* "SYSTEM ONLINE" inside the terminal bar */
+    margin-left: auto;
+    color: var(--green);
+    font: 12px "Courier New", monospace;
+    letter-spacing: 2px;
+}
+
+/* ---------- 4. TERMINAL TEXT + CV BUTTON ---------- */
+.term-body { padding: 8px 26px 30px; font-family: "Courier New", monospace; }
+
+.term-cmd { margin: 0 0 18px; color: var(--green); font-size: clamp(16px, 1.8vw, 22px); }
+.term-prompt { margin-right: 6px; }
+
+.term-text {                            /* stays inside the box, wraps automatically */
+    margin: 0;
+    text-align: left;
+    max-width: 100%;
+    color: #d6e2d9;
+    font-size: clamp(14px, 1.45vw, 17px);
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+    min-height: 9em;                    /* reserves space so the box doesn't jump while typing */
+}
+
+.cv-btn {
+    display: block;               /* Changes it from inline-block to block */
+    width: fit-content;           /* Keeps the button only as wide as its text */
+    margin: 24px auto 0;          /* 'auto' on left and right centers the block */
+    padding: 10px 22px;
+    background: #050505;
+    border: 1px solid #666;
+    outline: 1px solid #282828;
+    outline-offset: 3px;
+    color: #fff;
+    font: 20px Georgia, serif;
+    letter-spacing: 2px;
+    transition: color .18s, border-color .18s, background .18s;
+}
+
+.cv-btn:hover { color: var(--green); border-color: var(--green); background: #0a0f0b; }
+.cv-btn.is-hidden { visibility: hidden; }   /* JS reveals it after typing ends */
+
+/* ---------- 5. OTHER SECTIONS (placeholders) ---------- */
+.home-section {
+    min-height: 70svh;
+    padding: 90px 28px;
+    scroll-margin-top: var(--header-height);
+    border-top: 1px solid #111;
+    text-align: center;
+}
+.home-section h2 { color: var(--green); font-weight: 500; font-size: clamp(28px, 4vw, 44px); margin: 0 0 14px; }
+
+/* ---------- 6. RESPONSIVE ---------- */
+@media (max-width: 760px) {
+    .hero { padding-top: calc(var(--header-height) + 30px); }
+    .hero-name { margin-top: 20px; letter-spacing: .08em; }
+    .hero-role { margin-top: 24px; }
+    .terminal-frame { margin-top: 50px; }
+    .dot { width: 14px; height: 14px; }
+    .term-body { padding: 4px 16px 22px; }
+    .term-status { font-size: 10px; letter-spacing: 1px; }
+}
+
+
+/* ==========================================
+    Nav Bar Styles (fixed at top of page)
+   ========================================== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background: rgba(5, 5, 5, 0.95);
+    border-bottom: 1px solid #11331c;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Brand & Blinking Dot Fix */
+.brand {
+    font-family: "Courier New", monospace;
+    font-weight: 700;
+    color: var(--green, #00e85b);
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.brand-dot {
+    animation: blinkDot 1s steps(1) infinite;
+}
+@keyframes blinkDot {
+    50% { opacity: 0; }
+}
+
+/* Nav Bar Layout */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Ensure clicks pass through SVG icons directly to the button */
+.menu-toggle svg {
+    pointer-events: none;
+}
+
+/* ---------- 2. MOBILE HAMBURGER & OVERLAY STYLES ---------- */
+.menu-toggle {
+    display: none;
+    background: #050505;
+    border: 1px solid #11331c;
+    color: var(--green);
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    z-index: 1002;
+}
+
+.menu-toggle .icon-close { display: none; }
+.menu-toggle .icon-hamburger { display: block; }
+
+.menu-toggle.is-active .icon-hamburger { display: none; }
+.menu-toggle.is-active .icon-close { display: block; }
+
+@media(max-width: 950px) {
+    .menu-toggle {
+        display: flex !important;
+    }
+
+    .header-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 0 16px !important;
+    }
+
+    .brand {
+        margin: 0 !important;
+    }
+
+    .header-clock {
+        display: none !important;
+    }
+
+    /* FULL-SCREEN OVERLAY MENU - Hidden by default */
+    .main-nav {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #050505 !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 16px !important;
+        padding: 80px 20px 20px !important;
+        display: none !important; 
+        z-index: 1001 !important;
+        overflow-y: auto !important;
+    }
+
+    /* Shown only when JavaScript adds .is-open */
+    .main-nav.is-open {
+        display: flex !important; 
+    }
+
+    .nav-link {
+        font-size: 15px;
+        width: 100%;
+        max-width: 280px;
+        padding: 10px 14px;
+        background: #090d0a;
+        border: 1px solid #112215;
+        border-radius: 6px;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .nav-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--green, #00e85b);
+}
+
+/* Proportional Small Icon Sizing */
+.nav-icon {
+    width: 25px !important;
+    height: 25px !important;
+    min-width: 16px;
+    min-height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Live Clock Styling */
+.header-clock {
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    color: var(--green, #00e85b);
+    letter-spacing: 1px;
+}
+
+/* ---------- CONTACT ICON ANIMATED BOUNCING DOTS ---------- */
+@keyframes bounceDot {
+    0%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-4px); /* How high the dot bounces */
+    }
+}
+
+.nav-link:hover .chat-dot,
+.nav-link.active .chat-dot {
+    animation: bounceDot 1.2s infinite ease-in-out;
+}
+
+/* Stagger the animation delay so they bounce one after another */
+.chat-dot.dot-1 {
+    animation-delay: 0s;
+}
+.chat-dot.dot-2 {
+    animation-delay: 0.2s;
+}
+.chat-dot.dot-3 {
+    animation-delay: 0.4s;
+}
+
+
+/* ==========================================
+   SECTION 5: Contact Section (2-Terminal Layout)
+   ========================================== */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contact-frame {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.contact-heading {
+    color: var(--green, #00e85b);
+    font-family: "Courier New", monospace;
+    font-size: clamp(20px, 2vw, 24px);
+    margin: 0 0 14px;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.contact-link-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #d6e2d9;
+    text-decoration: none;
+    font-family: "Courier New", monospace;
+    font-size: clamp(13px, 1.3vw, 15px);
+    transition: color 0.2s ease;
+}
+
+.contact-link-item:hover {
+    color: var(--green, #00e85b);
+}
+
+.contact-icon {
+    stroke: currentColor;
+    flex-shrink: 0;
+}
+
+/* Form Styles Inside Terminal Box */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group label {
+    color: var(--green, #00e85b);
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group textarea {
+    background: #000;
+    border: 1px solid #444;
+    border-radius: 3px;
+    padding: 8px 12px;
+    color: #fff;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--green, #00e85b);
+    box-shadow: 0 0 8px rgba(226, 230, 228, 0.2);
+}
+
+.send-btn {
+    display: block !important;
+    width: 100% !important;
+    margin: 16px auto 0 !important;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Responsive adjustment for mobile screens */
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+}
+
+/* ==========================================
+   SECTION 4: Certificates Section (2-Terminal Layout)
+   ========================================== */
+.cert-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: left;
+}
+.cert-frame { width: 100% !important; margin: 0 !important; }
+
+.cert-bar { justify-content: space-between; }
+.term-dots { display: flex; gap: 10px; }
+
+.cert-badges { display: flex; gap: 10px; align-items: center; }
+.cert-badges img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.cert-progress { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.cert-progress li {
+    color: #d6e2d9;
+    font-family: "Courier New", monospace;
+    font-size: clamp(13px, 1.3vw, 16px);
+}
+.cert-progress li::before { content: "> "; color: var(--green, #00e85b); }
+.cert-tag { color: #ffe27a; font-size: 12px; margin-left: 6px; }
+
+@media (max-width: 900px) {
+    .cert-container { grid-template-columns: 1fr; gap: 60px; }
+}
+
+/* ---------- CERT TERMINALS: equal height + bottom-centre button ---------- */
+.cert-frame .term-window { height: 100%; display: flex; flex-direction: column; }
+.cert-frame .term-body   { flex: 1; display: flex; flex-direction: column; }
+.cert-frame .term-body .cv-btn { margin: auto auto 0; }   /* pushes it to bottom + centre */
+
+/* ---------- COMPLETED CERTIFICATES LIST ---------- */
+.cert-done {
+    list-style: none;
+    margin: 10px 0 32px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;                         /* space between each certification (was 14px) */
+}
+.cert-done li {
+    font-family: "Courier New", monospace;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 20px;                  /* space between the tick and the text (was 12px) */
+    row-gap: 6px;                      /* space between the name and the issuer line */
+    align-items: start;
+    transition: opacity .4s ease, transform .4s ease;
+}
+.cert-done li::before {
+    content: "[\2713]";
+    color: var(--green, #00e85b);
+    grid-row: 1 / span 2;
+    align-self: center;
+    padding-left: 6px;                 /* small indent from the terminal's left edge */
+}
+.cert-name {
+    color: #d6e2d9;
+    font-size: clamp(14px, 1.4vw, 17px);
+    line-height: 1.5;
+}
+.cert-meta {
+    color: #8793a0;
+    font-size: 13px;
+    letter-spacing: .5px;
+}.cert-name { color: #d6e2d9; font-size: clamp(13px, 1.3vw, 16px); }
+.cert-meta { color: #8793a0; font-size: 12px; margin-top: 2px; }.cert-done li::before { content: "[\2713]"; color: var(--green, #00e85b); margin-right: 8px; float: left; }
+.cert-name { color: #d6e2d9; font-size: clamp(13px, 1.3vw, 16px); padding-left: 38px; }
+.cert-meta { color: #8793a0; font-size: 12px; padding-left: 38px; }
+.cert-done li.is-hidden { opacity: 0; transform: translateX(-8px); }
+
+/* ---------- BUTTON ARROW ---------- */
+.btn-arrow { display: inline-block; margin-left: 8px; transition: transform .2s ease; }
+.cv-btn:hover .btn-arrow { transform: translateX(5px); }
+
+/* ---------- SKILLS SECTION ---------- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* The main outer window frame (Terminal theme) */
+.skill-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    border-radius: 6px;                            /* Sleek terminal corners */
+    background: #020b04;                           /* Dark terminal background */
+    border: 1px solid #00ff33;                     /* Terminal neon green border */
+    box-shadow: 0 8px 28px rgba(0, 255, 51, 0.08);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.skill-card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 12px 34px rgba(0, 255, 51, 0.18); 
+}
+
+/* Removed the overarching background overrides from before */
+.skill-1, .skill-2, .skill-3, .skill-4, .skill-5, .skill-6 { 
+    background: #020b04; 
+}
+
+/* ---------- SKILLS SECTION ---------- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Outer Main Rectangle Frame (Terminal Window) */
+.skill-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    border-radius: 6px;                            /* Sleek terminal corners */
+    background: #020b04 !important;                /* Dark terminal background */
+    border: 1px solid #00f2ff !important;          /* Terminal neon green border */
+    box-shadow: 0 8px 28px rgba(0, 255, 51, 0.08);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.skill-card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 12px 34px rgba(0, 255, 51, 0.18); 
+}
+
+/* Forces all individual card layout classes to adopt the terminal background */
+.skill-1, .skill-2, .skill-3, .skill-4, .skill-5, .skill-6 { 
+    background: #020b04 !important; 
+}
+
+/* 
+   ---------- INNER RECTANGLE PILLS (Python, Splunk, etc.) ----------
+   Targets the inner spans precisely using your structural class names
+*/
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;                                     /* Keeps spacing uniform between pills */
+}
+
+.skill-tags span {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 6px;                            /* Hexagonal/blocky aesthetic to match terminal box */
+    color: #ffffff !important;                     /* Clear white text for visibility */
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    
+    /* Elegant, rich deep-blue gradient layout */
+    background: linear-gradient(135deg, #345791, #1456a8) !important; 
+    border: 1px solid rgba(206, 215, 225, 0.595) !important;
+    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Header typography and icons */
+.skill-head { display: flex; align-items: center; gap: 14px; }
+.skill-head h3 {
+    margin: 0;
+    color: white !important;                     /* Keeps headers terminal green */
+    font: 700 clamp(15px, 1.4vw, 18px) "Courier New", monospace;
+    line-height: 1.3;
+}
+
+.skill-icon {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(0, 255, 51, 0.1) !important;  /* Subtly green tinted icon tray */
+    border: 1px solid rgba(53, 182, 247, 0.3);
+}
+
+.skill-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: #e4e8eb !important;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* skill pills */
+.skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-tags span {
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .28);
+    border: 1px solid rgba(255, 255, 255, .18);
+    color: #e6f0ff;
+    font: 13px "Courier New", monospace;
+}
+
+@media (max-width: 1050px) { .skills-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px)  { .skills-grid { grid-template-columns: 1fr; gap: 22px; } }
+
+/* ---------- EXPERIENCE & EDUCATION SECTION ---------- */
+.exp-edu {
+    display: grid;
+    grid-template-columns: 2fr 1fr;      /* experience wide (left), education narrow (right) */
+    gap: 36px;
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: left;
+    align-items: start;
+}
+.exp-col, .edu-col { min-width: 0; }
+.col-title { margin: 0 0 14px; color: var(--green, #00e85b); font: 700 22px "Courier New", monospace; }
+
+/* total years + filter */
+.exp-total { margin: 0; color: #e8efe9; font: 16px "Courier New", monospace; }
+.exp-total strong { color: var(--green, #00e85b); }
+.exp-sub { margin: 6px 0 18px; color: #8793a0; font: 13px "Courier New", monospace; }
+
+.exp-filter { display: flex; gap: 10px; margin-bottom: 8px; }
+.filter-btn {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid #2c4a37;
+    background: transparent;
+    color: #a8b2c2;
+    font: 14px "Courier New", monospace;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+.filter-btn:hover { color: #fff; border-color: var(--green, #00e85b); }
+.filter-btn.is-active { background: var(--green, #00e85b); border-color: var(--green, #00e85b); color: #04140a; font-weight: 700; }
+
+/* horizontal timeline (scrolls sideways if there are many) */
+.timeline { display: flex; gap: 24px; overflow-x: auto; padding: 8px 4px 22px; }
+.tl-item { position: relative; flex: 0 0 270px; padding-top: 44px; }
+.tl-item::before {                       /* the line joining the circles end to end */
+    content: ""; position: absolute; top: 21px; left: -12px; right: -12px; height: 2px; background: #1f3d2a;
+}
+.tl-dot {
+    position: absolute; top: 13px; left: 0; width: 18px; height: 18px; border-radius: 50%;
+    background: #555; border: 2px solid #050505; transition: all .3s ease;
+}
+.tl-year { position: absolute; top: 9px; left: 28px; color: #8793a0; font: 12px "Courier New", monospace; }
+
+.exp-card {
+    display: flex; flex-direction: column; gap: 10px; height: 100%;
+    padding: 18px; border-radius: 14px;
+    background: rgba(6, 12, 9, .88); border: 1px solid #1c3a26;
+    font-family: "Courier New", monospace;
+    transition: opacity .35s ease, filter .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+.exp-top { display: flex; align-items: center; gap: 12px; }
+.exp-logo, .logo-fallback {
+    width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px; object-fit: contain; background: #fff;
+}
+.logo-fallback { display: flex; align-items: center; justify-content: center; background: #123; color: var(--green, #00e85b); font-weight: 700; }
+.exp-company { margin: 0; color: #fff; font-size: 15px; line-height: 1.3; }
+.exp-role { margin: 0; color: var(--green, #00e85b); font-size: 14px; }
+.exp-dur { margin: 0; color: #8793a0; font-size: 12px; }
+.exp-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.exp-tools span { padding: 3px 9px; border-radius: 999px; background: rgba(0, 232, 91, .1); border: 1px solid #1f4d31; color: #cfe9d8; font-size: 11px; }
+.exp-desc { margin: 0; color: #d6e2d9; font-size: 13px; line-height: 1.6; flex: 1; }
+.exp-more { color: var(--green, #00e85b); font-size: 13px; width: fit-content; }
+.exp-more:hover { text-decoration: underline; }
+
+/* active (selected filter) vs dimmed (other type) */
+.tl-item.is-active .tl-dot  { background: var(--green, #00e85b); box-shadow: 0 0 10px var(--green, #00e85b); }
+.tl-item.is-active .exp-card { border-color: #2f7a4a; box-shadow: 0 0 16px rgba(0, 232, 91, .18); }
+.tl-item.is-dim .exp-card { opacity: .38; filter: grayscale(1); }
+
+/* education */
+.edu-col .terminal-frame { margin: 0; width: 100%; }
+.edu-head { display: flex; align-items: center; gap: 14px; }
+.edu-logo { width: 54px; height: 54px; flex-shrink: 0; border-radius: 10px; object-fit: contain; background: #fff; }
+.edu-uni { margin: 0; color: #fff; font-size: 16px; line-height: 1.3; }
+.edu-course { margin: 4px 0 0; color: var(--green, #00e85b); font-size: 14px; }
+.edu-duration { margin: 14px 0 8px; color: #8793a0; font-size: 13px; }
+.edu-desc { margin: 0; color: #d6e2d9; font-size: 14px; line-height: 1.7; }
+.edu-item + .edu-item { margin-top: 26px; padding-top: 22px; border-top: 1px solid #1c3a26; }
+
+@media (max-width: 1050px) { .exp-edu { grid-template-columns: 1fr; } }
+@media (max-width: 600px)  { .tl-item { flex-basis: 240px; } }
+
+
+/* ---------- WRITEUPS CAROUSEL ---------- */
+:root { --wr-w: min(420px, 78vw); --wr-gap: 28px; }
+
+.wr-intro { margin: 0 auto 36px; }
+.wr-wrap { position: relative; max-width: 1100px; margin: 0 auto; }
+
+.wr-stage {
+    display: grid;                       /* every card sits in the same cell; JS offsets them sideways */
+    justify-items: center;
+    padding: 16px 0 24px;
+    overflow: hidden;
+    touch-action: pan-y;                 /* vertical scroll still works, horizontal swipe is ours */
+    user-select: none;
+    outline: none;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.wr-slide {
+    grid-area: 1 / 1;
+    width: var(--wr-w);
+    text-align: left;
+    transform: translateX(calc(var(--off, 0) * (var(--wr-w) + var(--wr-gap)))) scale(.86);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .6s ease, filter .6s ease;
+}
+.wr-slide.no-anim { transition: none; }
+.wr-slide.is-near   { opacity: .45; filter: grayscale(1); pointer-events: auto; cursor: pointer; }
+.wr-slide.is-active { opacity: 1; filter: none; transform: translateX(0) scale(1); pointer-events: auto; z-index: 2; }
+
+.wr-card {
+    display: flex; flex-direction: column; height: 100%;
+    border-radius: 16px; overflow: hidden;
+    background: rgba(6, 12, 9, .92);
+    border: 1px solid #1c3a26;
+    font-family: "Courier New", monospace;
+    transition: border-color .4s ease, box-shadow .4s ease;
+}
+.wr-slide.is-active .wr-card { border-color: #2f7a4a; box-shadow: 0 0 22px rgba(0, 232, 91, .2); }
+
+/* small display preview */
+.wr-preview {
+    aspect-ratio: 16 / 9; background: linear-gradient(135deg, #0b2a1a, #0e3b5a);
+    display: flex; align-items: center; justify-content: center;
+}
+.wr-preview img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
+
+.wr-body { display: flex; flex-direction: column; flex: 1; gap: 12px; padding: 20px; }
+.wr-title { margin: 0; color: #fff; font-size: 18px; line-height: 1.35; }
+.wr-tag {
+    width: fit-content; padding: 4px 12px; border-radius: 999px;
+    background: rgba(0, 232, 91, .1); border: 1px solid #1f4d31; color: #cfe9d8; font-size: 12px;
+}
+.wr-tag b { color: var(--green, #00e85b); font-weight: 700; }
+.wr-desc { margin: 0 0 12px; color: #d6e2d9; font-size: 14px; line-height: 1.7; }
+.wr-card .cv-btn { margin: auto auto 0; font-size: 16px; padding: 9px 20px; }   /* button pinned bottom-centre */
+
+/* arrows + dots */
+.wr-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+    width: 46px; height: 46px; border-radius: 50%;
+    background: rgba(5, 5, 5, .85); border: 1px solid var(--green, #00e85b); color: var(--green, #00e85b);
+    font: 700 20px "Courier New", monospace; cursor: pointer; transition: all .2s ease;
+}
+.wr-arrow:hover { background: var(--green, #00e85b); color: #04140a; }
+.wr-prev { left: 4px; }
+.wr-next { right: 4px; }
+
+.wr-dots { display: flex; justify-content: center; gap: 10px; margin-top: 6px; }
+.wr-dots button { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 0; background: #3a4a40; cursor: pointer; transition: all .3s ease; }
+.wr-dots button.is-active { background: var(--green, #00e85b); width: 26px; border-radius: 6px; }
+
+.wr-all { display: inline-block; margin-top: 26px; color: var(--green, #00e85b); font: 15px "Courier New", monospace; }
+.wr-all:hover { text-decoration: underline; }
+
+@media (max-width: 600px) {
+    /* on phones the arrows sit over the preview image so they never cover the title */
+    .wr-arrow { width: 38px; height: 38px; font-size: 16px; top: calc(16px + var(--wr-w) * .28); }
+}
+@media (prefers-reduced-motion: reduce) { .wr-slide { transition: none; } }
+

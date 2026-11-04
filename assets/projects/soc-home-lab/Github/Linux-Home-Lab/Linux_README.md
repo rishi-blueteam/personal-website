@@ -1,0 +1,340 @@
+**SOC Simulator - Where you Attack, Simulate, Detect, Triage, and Respond**
+
+
+<h3>Phase 1: Client Architecture Setup </h3>
+
+
+![alt text](Readme_Images/Phase%201%20Client%20Architecture%20Setup%20MD.png)
+
+<h4> Gateway 1: Postfix MTA Configuration </h4> 
+
+``` python
+               SMTP
+                 ↓
+               Receive/send email
+                 ↓
+               Deliver message to mailbox
+```
+
+
+<h4> Gate 2: MDA & IMAP Configuration (Dovecot) </h4> 
+
+
+So now we create a Maildir - which means that all the mails that are stored are stored here by the email server on the disk currently. 
+
+Every file is stored as a seperate text file. Each of those are stored in a directory structure as follows:
+
+
+```
+/home/client01/Maildir/
+├── tmp/   <-- Temporary space while an email is actively being delivered
+├── new/   <-- Unread emails that just arrived
+└── cur/   <-- Emails that have been read or opened
+```
+
+
+The workflow becomes like:
+
+1. Postfix recieves the mail, and writes it inside a <b>/tmp</b> file
+2. Once the file is written fully errors, it moves to <b>/tmp</b>
+3. Then if the email file is opened, then it goes into <b>/cur</b>
+
+```
+# Create Maildir directories for client01
+sudo mkdir -p /home/client01/Maildir/{cur,new,tmp}
+
+# Set owner permissions so client01 and Dovecot can write to it
+sudo chown -R client01:client01 /home/client01/Maildir
+sudo chmod -R 700 /home/client01/Maildir
+
+-------------------------------------------------------------------
+
+
+             Mailbox storage
+                   │
+                   ▼
+                DOVECOT
+                   │
+                  IMAP
+                   │
+                   ▼
+                 WEBMAIL
+```
+
+
+<b> Protocol used here: IMAP </b>
+
+* <b>IMAP</b>: Internet Message Autentication Protocol, is used when users who wish to access the mail server to view the list of messages it recieved. 
+* The list of messages recieved can be viewed, and technically every message has certain content which is stored in the server(dovcot)
+
+
+<h4> Gate 3: Victim Account Provisioning & Direct Delivery Test </h4> 
+
+```
+Name:
+Client01
+
+Email:
+client01@lab.local
+
+Mailbox:
+client01
+```
+
+Now since our user is created: 
+
+We can send a sample mail via Postfix to see if the mail goes to the Mail Storage(Dovcot) and the the client could then access it.
+
+
+![alt text](Readme_Images/image-4.png)
+
+We see this big long text of random strings is as every new mail represents as a new file and a dedicated string for each new file.
+
+Lets see the list of files the user has opened in the image below.
+
+![alt text](Readme_Images/image-5.png)
+
+
+<h4> Gate 4: Roundcube Webmail Installation & Verification </h4> 
+
+Now time to for the user to access the mail, via the UI which in this case will be that user has access to the mailbox and he interacts with each and every single mail.
+This is the planned ouput
+
+```
+┌─────────────────────────────────────────────┐
+│ Roundcube                                   │
+├──────────────┬──────────────────────────────┤
+│ Inbox (10)   │                              │
+│ Sent         │  ⚠ CLIENTE PRIME...         │
+│ Drafts       │    banco.bradesco@...        │
+│ Trash        │                              │
+│              │  ⚠ Microsoft Account...     │
+│              │                              │
+└──────────────┴──────────────────────────────┘
+```
+
+<b>Results:</b>
+
+![alt text](Readme_Images/image-2.png)
+
+![alt text](Readme_Images/image-3.png)
+
+
+
+---------------
+
+
+<h3>Phase 2: Phshing Email Extraction & Parsing </h3>
+
+This phase involves sending the mail via the github repository to the user mail box so that once the email arrives, we get to do our own analysis which will be given by initial analysis from Wazuh, Automatic Tool Correlation Analysis like a SOC analyst would need to conclude to a decision if an Email is malacious or not. 
+
+<b>Credit for Github Repository for Phishing Mails:</b> <insert link here>
+
+
+Every single Mail parsed is from the replay_phish.py file which will access every single .eml file from the repo on a random base, select, note the metadata & exclusion to the history so that while we analyze and practice, we never ever analyze the same mail again, or no new same mail comes to the inbox ever, and goes on to send to the user's inbox. 
+
+Workflow:
+
+### Phase 2: Roundcube Mailbox Setup
+
+
+![alt text](Readme_Images/image-1.png)
+
+The <b>MIME parser</b> is simply the component that understands the internal structure of the .eml headers, HTML/plaintext, attachments, MIME boundaries, etc.Now, the replay engine can deliver the email correctly into the simulated client's mailbox.
+
+
+```
+             phishing_001.eml
+                     │
+                     ▼
+               MIME parser
+                     │
+           ┌─────────┴─────────┐
+           │                   │
+        Headers              Body
+           │                   │
+           └─────────┬─────────┘
+                     │
+                     ▼
+              Message builder
+                     │
+                     ▼
+                  Postfix
+                     │
+                     ▼
+          client01@lab.local
+                     │
+                     ▼
+                Dovecot
+                     │
+                     ▼
+                Roundcube
+```
+
+
+Now every mail sent may or may not contain a url, and most likely if the url is embedded as a button or a link to click on, that possible link could be a shortened link in the format of .bitly, tinyurl.com, goo.gl etc.
+
+The next ideal is to unshorten it and rewrite to a safe link (Microsoft Approach YES I KNOW!)
+
+```plaintext
+
+   [ replay_phish.py ]
+          │ (Sends raw .eml)
+          ▼
+┌─────────────────────────────────────────┐
+│       email_intake_filter.py            │
+│  1. Parse .eml MIME body (HTML/Text)    │
+│  2. Extract body URLs (Ignore noise)    │
+│  3. Unshorten & Check Threat Intel APIs │
+│  4. Clean? Rewrite to SafeLink format   │
+│  5. Malicious? Flag/Quarantine          │
+└─────────────────────────────────────────┘
+          │ (Delivers sanitized .eml)
+          ▼
+   [ Roundcube / User Inbox ]
+
+```
+
+
+
+
+<h3>Phase 3: Email Header Analysis Tool & Other Tools</h3><br>
+
+#### URL Analysis Tool
+
+This has 2 parts:
+
+<b>1. Interactive URL Analyzer Tool </b>
+
+We have the interactive URL analyzer which helps us automatically run, create snapshots for the phishing websites, helps us also get a list of sites and redirects if it exist's
+
+This helps us also see that how, upon clicking a single url, initially and the true url when the user lands on the actual page if the url has changed or no. 
+
+![alt text](Readme_Images/image-6.png)
+
+
+<b> 2. Mannual Interactive Phishing Site Sandbox</b>
+
+![alt text](Readme_Images/image.png)
+
+<b>Use Case:</b> 
+If an analyst wish to see, collect snapshots of each webpage, from each page the user would hypothetically land upon, or rather would get redirected to with respect to the Phishing website, is where this tool comes in handy.
+
+How does this help in Investigation?
+
+* <b>  clicks:</b> Captures exact DOM targets you interacted with (e.g., Tag: BUTTON, ID: login-btn, Class: btn-primary, inner text, destination href).
+
+* <b> network_requests:</b> Every background HTTP/XHR/Fetch request triggered by your manual clicks, including headers, payload targets, and method types.
+
+* <b>console_logs:</b> JavaScript execution logs, errors, and custom telemetry events emitted by the page.
+
+* <b>downloads:</b> Any malicious payloads, executables, or scripts that the page attempts to auto-download during interaction.
+
+* <b>manual_final_state.png:</b> A high-resolution screenshot captured when you press Ctrl+C to end the session.
+
+
+To run the mini sandbox kind of view: 
+
+```python
+pgrep -fl "Xvfb|x11vnc|novnc"
+```
+If we have no output it means the actual server is not running, and hence we have to make it listen.
+
+```bash
+Xvfb :99 -screen 0 1280x1024x24 &
+x11vnc -display :99 -forever -shared -rfbport 5900 &
+/usr/share/novnc/utils/novnc_proxy --vnc localhost:5900 --listen 6080 &
+```
+
+We visit the phishing link website:
+
+![alt text](Readme_Images/image-9.png)
+
+
+We even click on the learn more to redirect to another page:
+
+![alt text](Readme_Images/image-10.png)
+
+The logs on the cli gets noted as shown:
+![alt text](Readme_Images/image-11.png)
+
+Once we end the seession we also get to see the website screen shot being taken after we terminate the session:
+
+![alt text](Readme_Images/image-12.png)
+
+We can view the screenshot Images of the sites but by first creating a request to host the list of directories of the particular directory we are in and print it out.
+
+```bash
+   python3 -m http.server 8080
+```
+
+![alt text](Readme_Images/image-13.png)
+
+![alt text](Readme_Images/image-14.png)
+
+![alt text](Readme_Images/image-15.png)
+
+
+<b>3. Co-Relation Analyzer Tool Depictor (URL_Analyzer) </b>
+
+This tool helps us to do analysis across multiple security vendors tools for url analysis to come to conclusion of correlation
+
+
+| Tool                 | Focus / Strengths                                           | Free Tier Limits            | Key Data Provided                                                          |
+|----------------------|-------------------------------------------------------------|-----------------------------|----------------------------------------------------------------------------|
+| URLhaus (abuse.ch)   | Specialized in malware distribution URLs and payloads.      | Unlimited (No key required) | Threat status, malware family names, payload tags.                         |
+| URLScan.io           | Dynamic website sandbox analysis.                           | ~1,000 public scans/day     | Screenshot, final redirected URL, DOM elements, brand impersonation flags. |
+| Google Safe Browsing | Checks URLs against Google’s global malware/phishing list.  | 10,000 requests/day         | Match types (e.g., MALWARE, SOCIAL_ENGINEERING / Phishing).                |
+| PhishTank            | Community-driven crowd-sourced database for phishing sites. | Free API access             | Validated active phishing status.                                          |
+|                      |                                                             |                             |                                                                            |
+
+
+![alt text](Readme_Images/image-7.png)
+
+--------
+
+#### Domain Analysis Tool
+
+
+```plaintext
+
+[ Domain Input from EML ]
+           │
+           ▼
+┌────────────────────────────────┐    YES    ┌───────────────────────────────┐
+│ Is Domain in Tranco Top 100k?  │ ────────> │ Flag as Safelisted / Low Risk │
+└────────────────────────────────┘           └───────────────────────────────┘
+           │ NO
+           ▼
+┌────────────────────────────────┐
+│ RDAP Lookup: Domain Age Check  │
+└────────────────────────────────┘
+           │
+           ├─────────────────────────┐
+           ▼                         ▼
+  [ Age < 30-90 Days ]       [ Age > 90 Days ]
+  Flag as HIGH RISK          Continue Inspection
+  (Newly Registered Domain)          │
+           │                         ▼
+           │           ┌──────────────────────────────┐
+           │           │ Run dnstwist Brand Matching  │ ──> Detects typosquatting
+           │           └──────────────────────────────┘     against monitored brands
+           │                         │
+           ▼                         ▼
+┌─────────────────────────────────────────────────────┐
+│ Query VirusTotal / IPQS / URLhaus Domain Reputation │
+└─────────────────────────────────────────────────────┘
+
+```
+
+<b>Decision Matrix for Domain Threat Intelligence Feed</b>
+
+
+| Rule Condition         | Tranco Rank | Domain Age    | Risk Verdict | Action Triggered                                    |
+|------------------------|-------------|---------------|--------------|-----------------------------------------------------|
+| Top Global Site        | Top 100k    | Any           | LOW          | Safelisted; skip aggressive sandboxing              |
+| Newly Registered (NRD) | Unranked    | < 30 Days     | CRITICAL     | Flag suspicious; escalate alert for Wazuh           |
+| Recent Unranked        | Unranked    | 31 - 365 Days | HIGH         | Trigger multi-API reputation scan (url_analyzer.py) |
+| Mature Unranked        | Unranked    | > 365 Days    | MEDIUM       | Standard multi-API reputation scan                  |
+| Masked / Failed RDAP   | Unranked    | Unknown       | HIGH         | Fallback to full threat scan & VNC proxy sandbox    |
+

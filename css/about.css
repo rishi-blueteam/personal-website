@@ -1,0 +1,110 @@
+/* =========================================================
+   ABOUT ME PAGE (only this page). Menu lives in style.css / home.css.
+   1 Page + header  2 Story  3 Floating bubble  4 Colour journey  5 Responsive
+   Colours: change the 3 phase colours in the :root block.
+   ========================================================= */
+:root { --c-blue: #2f8bff; --c-red: #ff3b55; --c-purple: #b05bff; --ab-green: #19e868; }
+/* YOUR PHOTO IN THE BUBBLE: tune these two lines if your face is not framed well.
+   --photo-focus: which part of the photo stays visible  (x y, e.g. "50% 10%" = show more of the top of the photo)
+   --photo-zoom:  1 = fit the circle, 1.15 = zoom in a little */
+:root { --photo-focus: 50% 30%; --photo-zoom: 1; }
+.ab-page { padding: 120px 28px 90px; }
+.ab-head, .ab-hero, .ab-journey { width: min(100%, var(--content-width, 1180px)); margin-left: auto; margin-right: auto; }
+
+/* ---------- 2. STORY ---------- */
+.ab-hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 56px; align-items: center; margin-top: 40px; }
+.ab-story { font-family: "Courier New", monospace; color: #d6e2d9; font-size: 16px; line-height: 1.9; }
+.ab-story p { margin: 0 0 1.2em; }
+.ab-intro { padding-left: 16px; border-left: 3px solid var(--ab-green); color: #fff; font-size: 18px; }
+.ab-story strong { font-weight: 700; }
+.c-blue { color: var(--c-blue); } .c-red { color: var(--c-red); } .c-purple { color: var(--c-purple); }
+.c-rainbow { background: linear-gradient(90deg, #ff3b3b, #ffb02e, #2eff7a, #2ec8ff, #b05bff, #ff4be0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ab-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.ab-btn { padding: 10px 20px; border-radius: 8px; border: 1px solid var(--ab-green); color: var(--ab-green); font: 14px "Courier New", monospace; text-decoration: none; transition: all .2s; }
+.ab-btn:hover { background: var(--ab-green); color: #04140a; }
+.ab-btn.primary { background: var(--ab-green); color: #04140a; font-weight: 700; }
+.ab-btn.primary:hover { background: #fff; border-color: #fff; }
+.ab-btn:focus-visible, .ab-step:focus-visible, .ab-bubble:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+/* ---------- 3. FLOATING BUBBLE ---------- */
+.ab-stage { position: relative; width: min(100%, 460px); aspect-ratio: 1; margin: 0 auto; transform: translate(calc(var(--px, 0) * 16px), calc(var(--py, 0) * 16px)); transition: transform .35s ease-out; }
+.ab-bubble { position: absolute; inset: 4%; border-radius: 50%; cursor: pointer; outline: none; animation: abFloat 8s ease-in-out infinite; --tint: 47, 139, 255; }
+.ab-bubble[data-phase="red"]     { --tint: 255, 59, 85; }
+.ab-bubble[data-phase="purple"]  { --tint: 176, 91, 255; }
+.ab-bubble[data-phase="rainbow"] { --tint: 46, 200, 255; }
+@keyframes abFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-14px) rotate(1.2deg); } 66% { transform: translateY(8px) rotate(-1deg); } }
+
+/* four colour rings stacked; only the active one is visible */
+.ab-ring {
+    position: absolute; inset: 0; border-radius: 50%; opacity: 0; transition: opacity .9s ease; animation: abSpin 9s linear infinite;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px));
+            mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px));
+}
+.r-blue    { background: conic-gradient(#2f8bff, #00d0ff, #2f8bff, #0a3d9c, #2f8bff); filter: drop-shadow(0 0 14px rgba(47, 139, 255, .9)); }
+.r-red     { background: conic-gradient(#ff3b55, #ff8a3d, #ff3b55, #9c0a1e, #ff3b55); filter: drop-shadow(0 0 14px rgba(255, 59, 85, .9)); }
+.r-purple  { background: conic-gradient(#b05bff, #ff4be0, #b05bff, #5a1fb8, #b05bff); filter: drop-shadow(0 0 14px rgba(176, 91, 255, .9)); }
+.r-rainbow { background: conic-gradient(#ff3b3b, #ffb02e, #ffe92e, #2eff7a, #2ec8ff, #6a4bff, #ff4be0, #ff3b3b); filter: drop-shadow(0 0 14px rgba(255, 255, 255, .55)); }
+.ab-bubble[data-phase="blue"] .r-blue, .ab-bubble[data-phase="red"] .r-red,
+.ab-bubble[data-phase="purple"] .r-purple, .ab-bubble[data-phase="rainbow"] .r-rainbow { opacity: 1; }
+@keyframes abSpin { to { transform: rotate(360deg); } }
+
+.ab-core {
+    position: absolute; inset: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    padding: 12%; border-radius: 50%; text-align: center; font-family: "Courier New", monospace;
+    background: radial-gradient(circle at 30% 22%, rgba(255, 255, 255, .16), rgba(255, 255, 255, 0) 38%),
+                radial-gradient(circle at 50% 55%, rgba(8, 18, 30, .88), rgba(2, 6, 12, .94));
+    box-shadow: inset 0 0 70px rgba(var(--tint), .22), inset 0 0 8px rgba(255, 255, 255, .08);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: box-shadow .9s ease; overflow: hidden;
+}
+
+/* photo + readable text: the photo fills the circle, a dark fade only at the bottom carries the text, the face area stays clear */
+.ab-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--photo-focus); transform: scale(var(--photo-zoom)); transform-origin: var(--photo-focus); user-select: none; }
+.ab-shade {
+    position: absolute; inset: 0; pointer-events: none; transition: box-shadow .9s ease;
+    background: linear-gradient(to top, rgba(2, 6, 12, .95) 0%, rgba(2, 6, 12, .86) 26%, rgba(2, 6, 12, .45) 42%, rgba(2, 6, 12, 0) 58%);
+    box-shadow: inset 0 0 50px rgba(var(--tint), .38);
+}
+.ab-text { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 12% 9%; text-align: center; }
+.ab-bubble:not(.no-photo) .ab-core { padding: 0; }
+.ab-bubble:not(.no-photo) .ab-line { font-size: clamp(10px, 1.05vw, 12.5px); line-height: 1.4; text-shadow: 0 1px 8px #000; }
+.ab-bubble:not(.no-photo) .ab-line.big { margin-top: 2px; white-space: nowrap; font-size: clamp(15px, 1.85vw, 22px); text-shadow: 0 1px 10px #000, 0 0 22px rgba(var(--tint), .8); }
+.ab-bubble:not(.no-photo) .ab-now { margin-top: 5px; font-size: 10px; text-shadow: 0 1px 6px #000; }
+/* no photo found: hide the photo layers and centre the text like before */
+.ab-bubble.no-photo .ab-photo, .ab-bubble.no-photo .ab-shade { display: none; }
+.ab-bubble.no-photo .ab-text { position: static; padding: 0; }
+.ab-line { margin: 0; color: #cfe0ee; font-size: clamp(12px, 1.5vw, 16px); line-height: 1.5; }
+.ab-line.big { margin-top: 6px; color: #fff; font-weight: 700; font-size: clamp(20px, 3vw, 32px); text-shadow: 0 0 22px rgba(var(--tint), .8); transition: text-shadow .9s ease; }
+.ab-now { margin: 14px 0 0; color: #8fa3b5; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+.ab-now strong { color: rgb(var(--tint)); transition: color .9s ease; }
+
+/* small bubbles drifting around the big one */
+.ab-sat { position: absolute; border-radius: 50%; animation: abDrift 9s ease-in-out infinite alternate; transform: translate(calc(var(--px, 0) * -26px), calc(var(--py, 0) * -26px)); }
+.ab-sat::after { content: ""; position: absolute; inset: 14% 50% 50% 14%; border-radius: 50%; background: rgba(255, 255, 255, .5); filter: blur(2px); }
+.s1 { width: 54px; height: 54px; left: -2%; top: 14%; background: radial-gradient(circle at 35% 30%, #7fb8ff, var(--c-blue) 60%, #0a3d9c); box-shadow: 0 0 20px rgba(47, 139, 255, .6); animation-duration: 9s; }
+.s2 { width: 30px; height: 30px; right: 2%; top: 6%; background: radial-gradient(circle at 35% 30%, #ff9aa8, var(--c-red) 60%, #9c0a1e); box-shadow: 0 0 16px rgba(255, 59, 85, .6); animation-duration: 7s; animation-delay: -2s; }
+.s3 { width: 42px; height: 42px; right: -3%; bottom: 18%; background: radial-gradient(circle at 35% 30%, #d9a9ff, var(--c-purple) 60%, #5a1fb8); box-shadow: 0 0 18px rgba(176, 91, 255, .6); animation-duration: 11s; animation-delay: -4s; }
+.s4 { width: 22px; height: 22px; left: 8%; bottom: 4%; background: conic-gradient(#ff3b3b, #ffb02e, #2eff7a, #2ec8ff, #b05bff, #ff3b3b); box-shadow: 0 0 14px rgba(255, 255, 255, .4); animation-duration: 8s; animation-delay: -1s; }
+@keyframes abDrift { from { margin-top: 0; margin-left: 0; } to { margin-top: -18px; margin-left: 10px; } }
+
+/* ---------- 4. COLOUR JOURNEY ---------- */
+.ab-journey { margin-top: 90px; font-family: "Courier New", monospace; }
+.ab-journey h2 { margin: 0 0 8px; color: var(--ab-green); font-weight: 500; font-size: clamp(24px, 3.2vw, 34px); }
+.ab-journey-sub { margin: 0 0 26px; color: #a8b2c2; font-size: 15px; }
+.ab-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.ab-step {
+    --c: var(--c-blue); position: relative; padding: 20px; text-align: left; cursor: pointer; border-radius: 14px;
+    border: 1.5px solid rgba(255, 255, 255, .14); background: rgba(2, 10, 14, .82); color: #cfe0ee; font-family: inherit;
+    transition: border-color .4s, box-shadow .4s, transform .25s;
+}
+.ab-step[data-phase="red"] { --c: var(--c-red); } .ab-step[data-phase="purple"] { --c: var(--c-purple); } .ab-step[data-phase="rainbow"] { --c: #2ec8ff; }
+.ab-step .dot { display: block; width: 16px; height: 16px; margin-bottom: 14px; border-radius: 50%; background: var(--c); box-shadow: 0 0 14px var(--c); }
+.ab-step[data-phase="rainbow"] .dot { background: conic-gradient(#ff3b3b, #ffb02e, #2eff7a, #2ec8ff, #b05bff, #ff3b3b); }
+.ab-step h3 { margin: 0 0 6px; color: #fff; font-size: 17px; }
+.ab-step p { margin: 0; font-size: 13px; line-height: 1.65; color: #a8b8c6; }
+.ab-step:hover { transform: translateY(-3px); border-color: var(--c); }
+.ab-step.is-active { border-color: var(--c); box-shadow: 0 0 26px color-mix(in srgb, var(--c) 45%, transparent), inset 0 0 22px color-mix(in srgb, var(--c) 12%, transparent); }
+
+/* ---------- 5. RESPONSIVE ---------- */
+@media (max-width: 1000px) { .ab-hero { grid-template-columns: 1fr; gap: 36px; } .ab-stage { order: -1; width: min(86%, 380px); } .ab-steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .ab-page { padding: 100px 18px 70px; } .ab-steps { grid-template-columns: 1fr; } .ab-story { font-size: 15px; } .ab-core { padding: 10%; } }
+@media (prefers-reduced-motion: reduce) { .ab-bubble, .ab-ring, .ab-sat { animation: none; } .ab-stage { transition: none; transform: none; } .ab-sat { transform: none; } }

@@ -1,0 +1,103 @@
+/* =========================================================
+   EXPERIENCE PAGE (only this page). Menu lives in style.css / home.css.
+   1 Page + header  2 Filters  3 Timeline + role cards  4 Education + skills panel  5 Responsive
+   Colours: technical = green, management = gold (change in :root)
+   ========================================================= */
+:root { --xp-tech: #19e868; --xp-mgmt: #ffca70; }
+
+/* ---------- 1. PAGE + HEADER ---------- */
+.xp-page { padding: 120px 28px 90px; }
+.xp-head, .xp-bar, .xp-layout { width: min(100%, 1240px); margin-left: auto; margin-right: auto; }
+.xp-total { margin: 14px 0 0; color: #e8efe9; font: 15px "Courier New", monospace; }
+.xp-total strong { color: var(--xp-tech); }
+
+/* ---------- 2. FILTERS ---------- */
+.xp-bar { position: sticky; top: 56px; z-index: 40; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; padding: 12px 0; background: rgba(5, 5, 5, .88); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }   /* stays under the menu while you scroll */
+.xp-filter { padding: 8px 18px; border-radius: 999px; border: 1px solid #2c4a37; background: transparent; color: #a8b2c2; font: 14px "Courier New", monospace; cursor: pointer; transition: all .2s ease; }
+.xp-filter:hover { color: #fff; border-color: var(--xp-tech); }
+.xp-filter[aria-pressed="true"] { background: var(--xp-tech); border-color: var(--xp-tech); color: #04140a; font-weight: 700; }
+.xp-filter .n { opacity: .75; }
+.xp-filter:focus-visible, .xp-card:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* ---------- 3. TIMELINE + ROLE CARDS ---------- */
+.xp-layout { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 36px; align-items: start; margin-top: 30px; }
+.xp-timeline { position: relative; padding-left: 38px; }
+.xp-timeline::before { content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(#1f3d2a, #1f3d2a 92%, transparent); }
+.xp-item { position: relative; margin-bottom: 26px; --tc: var(--xp-tech); }
+.xp-item[data-type="management"] { --tc: var(--xp-mgmt); }
+.xp-dot { position: absolute; left: -35px; top: 30px; width: 18px; height: 18px; border-radius: 50%; background: var(--tc); border: 3px solid #050505; box-shadow: 0 0 12px var(--tc); transition: background .4s, box-shadow .4s; }
+.xp-when { margin: 0 0 8px; color: #8793a0; font: 12px "Courier New", monospace; letter-spacing: .5px; }
+
+.xp-card {
+    border: 1.5px solid rgba(255, 255, 255, .14); border-radius: 16px; background: rgba(6, 12, 9, .9); font-family: "Courier New", monospace; cursor: pointer;
+    transition: border-color .35s, box-shadow .35s, opacity .45s, filter .45s;
+}
+.xp-card:hover { border-color: color-mix(in srgb, var(--tc) 60%, transparent); }
+.xp-item.is-active .xp-card { border-color: var(--tc); box-shadow: 0 0 24px color-mix(in srgb, var(--tc) 28%, transparent); }
+
+.xp-top { display: flex; align-items: center; gap: 14px; padding: 18px 20px; }
+.xp-logo, .xp-edu-logo, .xp-fallback { width: 52px; height: 52px; flex-shrink: 0; border-radius: 10px; object-fit: contain; background: #fff; }
+.xp-fallback { display: flex; align-items: center; justify-content: center; background: #10221a; color: var(--tc); font: 700 22px "Courier New", monospace; }
+.xp-who { min-width: 0; flex: 1; }
+.xp-company { margin: 0; color: #fff; font-size: 18px; line-height: 1.3; }
+.xp-role { margin: 3px 0 0; color: var(--tc); font-size: 14px; }
+.xp-dur { margin: 4px 0 0; color: #8793a0; font-size: 12px; }
+.xp-type { flex-shrink: 0; align-self: flex-start; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--tc); color: var(--tc); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+
+/* the detailed part folds away when the card is collapsed by a filter */
+.xp-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .5s ease; }
+.xp-body-in { overflow: hidden; min-height: 0; }
+.xp-body-pad { padding: 0 20px 20px; border-top: 1px solid #14281c; }
+.xp-sec { margin-top: 18px; }
+.xp-sec h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; color: var(--tc); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+.xp-sec h4::before { content: ""; width: 14px; height: 2px; background: currentColor; }
+.xp-sec.ach h4 { color: var(--xp-mgmt); }
+.xp-sec p, .xp-sec li { color: #d6e2d9; font-size: 14px; line-height: 1.8; }
+.xp-sec p { margin: 0; }
+.xp-sec ul { margin: 0; padding-left: 1.2em; }
+.xp-sec li::marker { color: var(--tc); }
+.xp-inline-skills { display: none; }                                        /* only shown on small screens (see section 5) */
+
+.xp-item.is-collapsed .xp-body { grid-template-rows: 0fr; }
+.xp-item.is-collapsed .xp-card { opacity: .38; filter: grayscale(1); box-shadow: none; border-color: rgba(255, 255, 255, .1); }
+.xp-item.is-collapsed .xp-top { padding-top: 12px; padding-bottom: 12px; }
+.xp-item.is-collapsed .xp-logo, .xp-item.is-collapsed .xp-fallback { width: 34px; height: 34px; font-size: 16px; }
+.xp-item.is-collapsed .xp-dot { background: #555; box-shadow: none; }
+.xp-item.is-collapsed .xp-dur, .xp-item.is-collapsed .xp-type { display: none; }
+.xp-item.is-collapsed .xp-company { font-size: 15px; }
+
+/* ---------- 4. EDUCATION + SKILLS PANEL ---------- */
+.xp-side { position: sticky; top: 130px; display: flex; flex-direction: column; gap: 20px; max-height: calc(100vh - 150px); overflow-y: auto; padding: 4px; scrollbar-width: thin; scrollbar-color: #2f7a4a transparent; }
+.xp-side .terminal-frame { width: 100%; margin: 0; }
+.xp-side .term-window { min-height: 0; }
+.xp-edu-head { display: flex; align-items: center; gap: 14px; }
+.xp-edu-uni { margin: 0; color: #fff; font-size: 16px; line-height: 1.3; }
+.xp-edu-course { margin: 4px 0 0; color: var(--xp-tech); font-size: 14px; }
+.xp-edu-dur { margin: 14px 0 8px; color: #8793a0; font-size: 13px; }
+.xp-edu-desc { margin: 0; color: #d6e2d9; font-size: 14px; line-height: 1.7; }
+
+.xp-skills { padding: 20px; border: 1.5px solid rgba(25, 232, 104, .65); border-radius: 14px; background: rgba(2, 14, 9, .88); box-shadow: 0 0 18px rgba(0, 232, 91, .18); font-family: "Courier New", monospace; transition: opacity .25s ease; }
+.xp-skills.is-fading { opacity: 0; }
+.xp-skills h3 { margin: 0; color: #fff; font-size: 17px; }
+.xp-skills .for { margin: 4px 0 16px; color: var(--xp-tech); font-size: 12.5px; line-height: 1.5; }
+.xp-skills h5 { margin: 14px 0 8px; color: #8fa3b5; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+.xp-pills { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.xp-pills li { padding: 5px 13px; border-radius: 999px; font-size: 12px; }
+.xp-pills.tools li { border: 1px solid #2e86c1; color: #e8f4ff; background: linear-gradient(#0e3a66, #0a2a4c); }
+.xp-pills.concepts li { border: 1px solid #1f7a45; color: #d8ffe6; background: rgba(0, 232, 91, .12); }
+
+/* ---------- 5. RESPONSIVE ---------- */
+@media (max-width: 1050px) {
+    .xp-layout { grid-template-columns: 1fr; }
+    .xp-side { position: static; max-height: none; overflow: visible; }
+    .xp-skills { display: none; }                                           /* skills are shown inside each role card instead */
+    .xp-inline-skills { display: block; }
+    .xp-inline-skills .xp-pills { margin-top: 4px; }
+}
+@media (max-width: 600px) {
+    .xp-page { padding: 100px 16px 70px; }
+    .xp-timeline { padding-left: 30px; } .xp-dot { left: -29px; width: 16px; height: 16px; }
+    .xp-top { padding: 14px; gap: 10px; } .xp-body-pad { padding: 0 14px 16px; }
+    .xp-type { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .xp-body, .xp-card, .xp-skills { transition: none; } }

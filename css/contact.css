@@ -1,0 +1,27 @@
+/* =========================================================
+   CONTACT: page layout + form feedback styles
+   Used by html/contact.html AND by the Contact section of html/home.html
+   (the terminal boxes themselves are styled in home.css)
+   ========================================================= */
+
+/* ---------- contact.html page layout ---------- */
+.ct-page { padding: 120px 28px 90px; }
+.ct-head, .ct-page .contact-container { width: min(100%, var(--content-width, 1180px)); margin-left: auto; margin-right: auto; }
+.ct-page .contact-container { max-width: none; margin-top: 44px; }
+
+/* ---------- form feedback ---------- */
+.ct-req { margin-left: 4px; color: #ff6b7a; }
+.ct-opt { margin-left: 6px; color: #8793a0; font-size: 11px; letter-spacing: 0; }
+.ct-err { min-height: 1.3em; color: #ff8a96; font: 12px "Courier New", monospace; }
+.form-group input[aria-invalid="true"], .form-group textarea[aria-invalid="true"] { border-color: #ff5a6e; box-shadow: 0 0 8px rgba(255, 90, 110, .25); }
+.form-group textarea { resize: vertical; min-height: 96px; }
+.ct-count { align-self: flex-end; color: #6f8f7d; font: 11px "Courier New", monospace; }
+.ct-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; pointer-events: none; }   /* honeypot: invisible to people */
+.ct-status { min-height: 1.5em; margin: 14px 0 0; font: 13px/1.6 "Courier New", monospace; }
+.ct-status.is-ok { color: #4dff91; }
+.ct-status.is-err { color: #ff8a96; }
+.ct-status.is-warn { color: #ffca70; }
+.ct-status a { color: inherit; text-decoration: underline; }
+.send-btn[disabled] { opacity: .5; cursor: not-allowed; }
+
+@media (max-width: 700px) { .ct-page { padding: 100px 18px 70px; } }

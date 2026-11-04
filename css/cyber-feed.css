@@ -1,0 +1,39 @@
+/* =========================================================
+   LIVE CYBER FEED BAR (home page only), sits right under the menu
+   Change --cyf-top if your menu height changes (it is 56px in home.css).
+   To make the bar scroll away with the page instead of staying fixed, change "position: fixed" to "position: absolute".
+   ========================================================= */
+:root { --cyf-top: 56px; --cyf-h: 40px; --cyf-green: #19e868; }
+
+.cyber-feed {
+    position: fixed; top: var(--cyf-top); left: 0; right: 0; height: var(--cyf-h); z-index: 999;       /* below the menu (1000) so the mobile menu covers it */
+    display: flex; align-items: stretch;
+    background: rgba(3, 10, 7, .96); border-top: 1px solid rgba(25, 232, 104, .55); border-bottom: 1px solid rgba(25, 232, 104, .55);
+    box-shadow: 0 4px 18px rgba(0, 232, 91, .12);
+    font-family: "Courier New", monospace; font-size: 13px; color: #e8efe9;
+}
+.cyf-label { display: flex; align-items: center; gap: 10px; padding: 0 16px; white-space: nowrap; color: var(--cyf-green); font-size: 12px; font-weight: 700; letter-spacing: .5px; }
+.cyf-dot { width: 12px; height: 12px; border-radius: 50%; background: #ff3b3b; animation: cyfPulse 1.6s ease-out infinite; }
+@keyframes cyfPulse { 0% { box-shadow: 0 0 0 0 rgba(255, 59, 59, .7); } 100% { box-shadow: 0 0 0 10px rgba(255, 59, 59, 0); } }
+.cyber-feed.is-loading .cyf-dot, .cyber-feed.is-fallback .cyf-dot { background: #6c7a72; animation: none; }   /* red "live" dot only when the news really is live */
+.cyf-div { width: 1px; margin: 8px 0; background: rgba(25, 232, 104, .35); }
+
+.cyf-track { flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 0 14px; transition: opacity .2s ease, transform .2s ease; }
+.cyf-track.is-changing { opacity: 0; transform: translateY(5px); }
+.cyf-title { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; font-weight: 700; text-decoration: none; }
+a.cyf-title:hover { text-decoration: underline; }
+.cyf-bar { flex-shrink: 0; width: 1px; height: 16px; background: rgba(25, 232, 104, .45); }
+.cyf-meta { flex-shrink: 0; white-space: nowrap; color: #9bb3a4; font-size: 12px; }
+.cyf-source { color: var(--cyf-green); }
+
+.cyf-nav { display: flex; align-items: center; gap: 6px; padding: 0 10px; border-left: 1px solid rgba(25, 232, 104, .35); }
+.cyf-nav button { width: 28px; height: 26px; padding: 0; border: 1px solid var(--cyf-green); background: #04140a; color: var(--cyf-green); font: 700 16px/1 "Courier New", monospace; cursor: pointer; transition: background .2s, color .2s; }
+.cyf-nav button:hover { background: var(--cyf-green); color: #04140a; }
+.cyber-feed a:focus-visible, .cyf-nav button:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+
+@media (max-width: 760px) { .cyf-label { padding: 0 10px; } .cyf-label-text { display: none; } .cyf-meta, .cyf-bar { display: none; } .cyf-track { padding: 0 10px; } }
+@media (prefers-reduced-motion: reduce) { .cyf-dot { animation: none; } .cyf-track { transition: none; } }
+
+/* The menu links are taller (102px, from style.css) than the 56px menu bar. The extra part is invisible but it would sit on top of
+   this bar and block clicks on the arrows and headline, so trim the links to the bar's height on desktop (the look does not change). */
+@media (min-width: 951px) { .site-header .nav-link { height: var(--cyf-top); } }

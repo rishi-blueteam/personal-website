@@ -1,0 +1,77 @@
+/* =========================================================
+   SECURITY PORTFOLIO: sections 2 + 3 (slideshow + project cards)
+   The README viewer + Markdown styles come from blogs.css (shared), so load blogs.css first.
+   1 Sections  2 Slideshow  3 Filters  4 Project cards  5 Responsive
+   ========================================================= */
+:root { --pj-border: #f6e9a6; --pj-border-hover: #c79a00; }   /* light yellow -> dark yellow */
+
+/* ---------- 1. SECTIONS ---------- */
+.pj-section { width: min(100%, var(--content-width, 1180px)); margin: 0 auto; padding: 70px 28px 20px; scroll-margin-top: calc(var(--header-height, 120px) + 10px); }
+.pj-section[hidden], .pj-card[hidden] { display: none !important; }
+.pj-section h2 { margin: 0 0 8px; color: var(--green, #00e85b); font-weight: 500; font-size: clamp(26px, 3.6vw, 40px); }
+.pj-sub { margin: 0 0 28px; color: #a8b2c2; font-size: 15px; line-height: 1.7; max-width: 720px; }
+.pj-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- 2. SLIDESHOW ---------- */
+.ss-wrap { position: relative; }
+.ss-stage { display: grid; overflow: hidden; border-radius: 16px; border: 1px solid #2f7a4a; box-shadow: 0 0 30px rgba(0, 232, 91, .18); background: #050a07; touch-action: pan-y; user-select: none; outline: none; }
+.ss-slide { grid-area: 1 / 1; position: relative; margin: 0; aspect-ratio: 16 / 7; min-height: 280px; opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility .7s; background: linear-gradient(135deg, #0b2a1a, #0e3b5a); }
+.ss-slide.is-active { opacity: 1; visibility: visible; }
+.ss-slide > img { z-index: 1; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ss-initial { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 700 120px "Courier New", monospace; color: rgba(0, 232, 91, .25); }
+.ss-caption { position: absolute; inset: auto 0 0 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 56px 32px 28px; background: linear-gradient(to top, rgba(0, 0, 0, .92), rgba(0, 0, 0, 0)); }
+.ss-title { display: flex; align-items: center; gap: 10px; margin: 10px 0 0; color: #fff; font: 700 clamp(20px, 3vw, 32px) "Courier New", monospace; line-height: 1.25; }
+.ss-arrow { position: absolute; top: 50%; z-index: 3; width: 46px; height: 46px; transform: translateY(-50%); border-radius: 50%; border: 1px solid var(--green, #00e85b); background: rgba(5, 5, 5, .85); color: var(--green, #00e85b); font: 700 20px "Courier New", monospace; cursor: pointer; transition: all .2s; }
+.ss-arrow:hover { background: var(--green, #00e85b); color: #04140a; }
+.ss-prev { left: 12px; } .ss-next { right: 12px; }
+.ss-wrap.single .ss-arrow, .ss-wrap.single + .ss-dots { display: none; }
+.ss-dots { display: flex; justify-content: center; gap: 10px; margin-top: 16px; }
+.ss-dots button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: #3a4a40; cursor: pointer; transition: all .3s; }
+.ss-dots button.is-active { width: 26px; border-radius: 6px; background: var(--green, #00e85b); }
+
+/* ---------- 3. FILTERS (buttons/search styles come from blogs.css) ---------- */
+#projects .wr-tools { width: 100%; margin-top: 4px; }
+#projects .wr-count, #projects .wr-empty { width: 100%; }
+
+/* ---------- 4. PROJECT CARDS ---------- */
+.pj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 26px; align-items: start; margin-top: 22px; }
+.pj-card {
+    display: flex; flex-direction: column; gap: 12px; padding: 20px; border-radius: 16px;
+    background: rgba(6, 12, 9, .92); border: 2px solid var(--pj-border); font-family: "Courier New", monospace;
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+.pj-card:hover, .pj-card:focus-within, .pj-card.is-open { border-color: var(--pj-border-hover); }
+.pj-card:hover { box-shadow: 0 10px 28px rgba(199, 154, 0, .22); transform: translateY(-3px); }
+.pj-card.is-flash { animation: pjFlash 1.6s ease; }
+@keyframes pjFlash { 0%, 60% { box-shadow: 0 0 0 4px rgba(199, 154, 0, .55); } 100% { box-shadow: 0 0 0 0 rgba(199, 154, 0, 0); } }
+.pj-cat, .ss-caption .pj-cat { display: inline-block; width: fit-content; padding: 3px 10px; border-radius: 999px; background: rgba(246, 233, 166, .12); border: 1px solid #8a7a2a; color: #f6e9a6; font-size: 11px; letter-spacing: 1px; }
+.pj-title { margin: 0; }
+.pj-toggle { display: flex; align-items: center; gap: 10px; width: 100%; padding: 0; border: 0; background: none; color: #fff; text-align: left; font: 700 18px/1.35 "Courier New", monospace; cursor: pointer; }
+.pj-toggle:hover .pj-name { color: #f6e9a6; }
+.pj-name { flex: 0 1 auto; }
+.pj-star { display: inline-block; vertical-align: -3px; margin-left: 8px; flex-shrink: 0; width: 20px; height: 20px; fill: #ffd84a; stroke: #c79a00; stroke-width: 1.2; stroke-linejoin: round; }
+.pj-chev { flex-shrink: 0; width: 20px; height: 20px; margin-left: auto; fill: none; stroke: #f6e9a6; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s; }
+.pj-card.is-open .pj-chev { transform: rotate(180deg); }
+.pj-skills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.pj-skills li { padding: 4px 12px; border-radius: 8px; background: rgba(0, 232, 91, .1); border: 1px solid #1f4d31; color: #cfe9d8; font-size: 12px; }
+.pj-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+.pj-card.is-open .pj-detail { grid-template-rows: 1fr; }
+.pj-detail-inner { overflow: hidden; min-height: 0; }
+.pj-img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; border: 1px solid #1c3a26; margin: 4px 0 12px; }
+.pj-desc { margin: 0 0 6px; color: #d6e2d9; font-size: 14px; line-height: 1.7; }
+.pj-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 4px; }
+.pj-gh { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #555; color: #fff; transition: all .2s; }
+.pj-gh svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pj-gh:hover { border-color: #f6e9a6; color: #f6e9a6; }
+.pj-toggle:focus-visible, .pj-gh:focus-visible, .ss-arrow:focus-visible, .ss-dots button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* ---------- 5. RESPONSIVE ---------- */
+@media (max-width: 700px) {
+    .pj-section { padding: 50px 16px 10px; }
+    .pj-grid { grid-template-columns: 1fr; }
+    .ss-slide { aspect-ratio: 4 / 3; }
+    .ss-caption { padding: 40px 18px 18px; }
+    .ss-arrow { width: 38px; height: 38px; font-size: 16px; }
+    .ss-initial { font-size: 80px; }
+}
+@media (prefers-reduced-motion: reduce) { .ss-slide, .pj-detail, .pj-card, .pj-chev { transition: none; } .pj-card.is-flash { animation: none; } }
