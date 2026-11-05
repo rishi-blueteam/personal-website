@@ -381,10 +381,10 @@
    document.addEventListener("DOMContentLoaded", () => {
     // 1. Array of words/phrases you want to cycle through
     const words = [
-        "SOC Analyst L1",
+        "Aspiring SOC Analyst",
         "Cyber Security Enthusiast", 
-        "Vibe Coder", 
-        "AI-Security Specialist"
+        "Vibe Coder",
+        "Network Security"
     ];
     
     let wordIndex = 0;
