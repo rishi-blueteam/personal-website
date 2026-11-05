@@ -7,6 +7,11 @@
    ========================================================= */
 
 /* ---------- 0. VARIABLES ---------- */
+
+@import url('https://googleapis.com');
+
+
+
 :root {
     /* >>> PUT YOUR BACKGROUND GIF HERE, e.g. url("../assets/background.gif") <<< */
     --hero-bg: url("../assets/your-background.gif");
@@ -96,8 +101,28 @@
 .hero-role {
     margin: 40px 0 0;
     color: #fff;
-    font: 700 clamp(14px, 2vw, 24px) Arial, sans-serif;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem; /* These fonts run a bit large, so slightly scale it down */
+    letter-spacing: 4px; /* Spreads out the capital letters slightly */
+    font-weight: 500;
 }
+
+.cursor {
+    font-weight: bold;
+    color: #2198af; /* Matching your green color theme, or change to white/red */
+    animation: blink 0.7s infinite;
+    margin-left: 2px;
+}
+
+
+/* Cursor blinking animation loop */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+
 
 /* ---------- CLEAN TERMINAL FRAME WITH THIN ROUNDED BORDER ---------- */
 .terminal-frame {
