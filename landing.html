@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#050505">
+    <title>R_lgnd | Initializing</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body data-page="landing">
+<!-- ============ LAYER 1: MENU ============ -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#050505">
+    <title>R_lgnd | Initializing</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Override styling for landing page layout to remove gaps -->
+    <style>
+        .landing-screen {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 70px);
+            padding: 1.5rem 2rem;
+            box-sizing: border-box;
+            gap: 2.5rem;
+            margin-top: 0;
+        }
+        .soc-panel, .welcome-panel {
+            margin-top: 0 !important;
+        }
+    </style>
+    <script>
+        // If the user has already visited home, bounce them forward immediately
+        if (sessionStorage.getItem('hasVisitedHome')) {
+            window.location.replace('home.html');
+        }
+    </script>
+
+
+</head>
+
+    </header>
+
+
+    <main class="landing-screen">
+        <section class="soc-panel">
+            <div class="panel-heading"><span class="panel-led"></span> BLUE TEAM CONSOLE ACTIVITY <span
+                    class="panel-tag">SIMULATION</span></div>
+            <div class="soc-console" aria-label="Illustrative blue team activity">
+                <p><span class="dim">[00:00:01]</span> <span class="blue">SIEM</span> engine initialized</p>
+                <p><span class="dim">[00:00:02]</span> Monitoring telemetry streams...</p>
+                <p><span class="warn">[ALERT]</span> Suspicious outbound connection</p>
+                <p><span class="dim">Rule:</span> NET-104 / Unusual destination</p>
+                <p><span class="blue">analyst@lab</span>:~$ <span class="command">select-alert --id 1042</span></p>
+                <p><span class="dim">Severity:</span> <span class="warn">MEDIUM</span> <span class="dim">Status:</span>
+                    TRIAGE</p>
+                <p><span class="blue">analyst@lab</span>:~$ <span class="command">tcpdump -nn -c 3</span></p>
+                <p class="dim">09:41:02 IP 10.0.4.21.51522 &gt; 203.0.113.42.443</p>
+                <p class="dim">09:41:03 TLS session observed</p>
+                <p><span class="blue">analyst@lab</span>:~$ <span class="command">triage --correlate --close</span></p>
+                <p class="success">[CASE 1042] Evidence reviewed · disposition recorded · CLOSED</p>
+                <p><span class="blue">analyst@lab</span>:~$ <span class="console-cursor">_</span></p>
+            </div>
+            <p class="panel-footnote">Illustrative workflow only · sample data, not live monitoring</p>
+        </section>
+        <section class="welcome-panel">
+            <div class="terminal">
+                <div id="terminal-lines"></div>
+                <div class="terminal-loading"><span id="loading-text"></span>
+                </div>
+                <p class="terminal-welcome" id="terminal-welcome"><span class="prompt">&gt;</span> <span
+                        id="welcome-text"></span><span class="terminal-cursor">_</span></p>
+            </div><button class="open-profile-button" id="open-profile">Open Profile</button>
+            <p class="landing-hint" id="landing-hint" aria-live="polite"></p><button class="skip-intro"
+                id="skip-intro">Skip intro</button>
+        </section>
+    </main>
+    <script src="../js/main.js" defer></script>
+</body>
+
+</html>
