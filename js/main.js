@@ -73,7 +73,7 @@ if (currentPage === 'landing')
     let skipped = false, redirectInterval = null, redirectTimeout = null, navigated = false;
     
     function goHome() 
-    { if (navigated) return; navigated = true; window.location.href = 'home.html' }
+    { if (navigated) return; navigated = true; window.location.href = 'html/home.html' }
     async function runIntro() 
     {
         for (const message of CONFIG.terminalLines) 
@@ -83,7 +83,7 @@ if (currentPage === 'landing')
         loading.parentElement.classList.add('visible'); if (skipped) loading.textContent = CONFIG.loadingMessage; else await typeText(loading, CONFIG.loadingMessage, CONFIG.loadingTypingSpeedMs); await pause(250); welcome.classList.add('visible'); if (skipped) welcomeText.textContent = CONFIG.welcomeMessage; else await typeText(welcomeText, CONFIG.welcomeMessage, CONFIG.typingSpeedMs); await pause(CONFIG.buttonDelayAfterWelcomeMs); button.classList.add('visible'); startCountdown();
     }
     function startCountdown() { let seconds = CONFIG.countdownSeconds; hint.textContent = `Redirecting to Home in ${seconds}...`; redirectInterval = window.setInterval(() => { seconds--; if (seconds > 0) hint.textContent = `Redirecting to Home in ${seconds}...`; else { window.clearInterval(redirectInterval); hint.textContent = 'Opening Home...'; redirectTimeout = window.setTimeout(goHome, 250) } }, 1000) }
-    button.addEventListener('click', () => { window.clearInterval(redirectInterval); window.clearTimeout(redirectTimeout); window.location.href = 'home.html' });
+    button.addEventListener('click', () => { window.clearInterval(redirectInterval); window.clearTimeout(redirectTimeout); window.location.href = 'html/home.html' });
     skip.addEventListener('click', () => { if (skipped) { goHome(); return } skipped = true; skip.textContent = 'Skip to Home' });
     runIntro();
 }
