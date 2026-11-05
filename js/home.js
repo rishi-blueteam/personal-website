@@ -261,19 +261,19 @@
 (function () {
     const WRITEUPS = [
         { tag: "THM-Challenge", title: "J&Y Enterprise Tech Recipie Attack", image: "../assets/writeups/image2.png",
-          desc: "J&Y Enterprise famous coffee recipie 'Shot4j' digital safe under attack. J.A.V.A. recommends Rishab to detect, and mitigate the attack.",
+          desc: "J&Y's latest recipe, \"Shot4J\", attracted great attention at the global coffee festival. J&Y officials promised that the product will hit the stores in the coming months, but received multiple attacks on their servers.... J.A.V.A. recommends Rishab to detect, and mitigate the attack.",
           link: "blogs.html#snort-live-attack" },
         { tag: "THM-Fundamental", title: "Snort Challenge Room", image: "../assets/writeups/image1.png", 
-          desc: "Understanding configuration of Snort rules for insecure open ports and services. The room was about capturing HTTP,FTP,Log4j and other network traffic.",
+          desc: "Understanding configuration of Snort rules for insecure open ports and services. Finding a brute-force pattern in authentication logs using Bash and Splunk.",
           link: "blogs.html#snort-fundamental-challenge-room" },
         { tag: "THM-Challenge", title: "PicoSecure Internal Team Training", image: "../assets/writeups/image3.png",
-          desc: "Mini description: what the room or challenge was about and the approach you took.",
+          desc: "PicoSecure has decided to conduct a threat simulation and detection engineering engagement to bolster its malware detection capabilities. I was assigned to work with......",
           link: "blogs.html#pico-secure-internal-challenges" },
         { tag: "Article", title: "When Trust Becomes the Target for Attackers", image: "../assets/writeups/image4.png",
-          desc: "Mini description: what the room or challenge was about and the approach you took.",
+          desc: "Imagine being interviewed for an tele marketing organization, and once you are onboarded, start to work with the team, you realize that the organization is using your skills not to sell but scam people.....",
           link: "https://www.linkedin.com/pulse/inside-business-modern-scams-when-trust-becomes-target-rishab-shorey-itzzf/" },
         { tag: "Article", title: "Operation Epic Fury", image: "../assets/writeups/image5.png",
-          desc: "Mini description: what the room or challenge was about and the approach you took.",
+          desc: "In today's world, wars don't usually start with a single command for tanks to cross borders or missiles hitting targets. When we talk about today's conflicts, like the one between Iran (the one-man army) and the US and Israel, one thing is clear: modern warfare starts in cyberspace.",
           link: "https://www.linkedin.com/pulse/inside-business-modern-scams-when-trust-becomes-target-rishab-shorey-itzzf/" }
     ];
     const AUTOPLAY_MS = 5000;     // auto-swipe every 5 seconds (right to left)
@@ -374,3 +374,55 @@
 })();
 
 
+/* ==========================================
+   5.Hero Role Typewriter (terminal typing)
+   ========================================== */
+
+   document.addEventListener("DOMContentLoaded", () => {
+    // 1. Array of words/phrases you want to cycle through
+    const words = [
+        "SOC Analyst L1",
+        "Cyber Security Enthusiast", 
+        "Vibe Coder", 
+        "AI-Security Specialist"
+    ];
+    
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    const typewriterElement = document.getElementById("typewriter");
+
+    function type() {
+        const currentWord = words[wordIndex];
+        
+        // Determine whether to add or remove a character
+        if (isDeleting) {
+            typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        // Default typing speed
+        let typeSpeed = isDeleting ? 40 : 80; 
+
+        // If the full word is typed out
+        if (!isDeleting && charIndex === currentWord.length) {
+            typeSpeed = 1500; // Pause at the end of the full phrase before erasing
+            isDeleting = true;
+        } 
+        // If the word has been completely erased
+        else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length; // Move to next word, loop to start
+            typeSpeed = 400; // Small pause before starting to type the next word
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+
+    // Start the typewriter loop
+    type();
+});
