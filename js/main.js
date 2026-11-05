@@ -10,7 +10,7 @@ const CONFIG =
     linePauseMs: 170, 
     loadingTypingSpeedMs: 42, 
     buttonDelayAfterWelcomeMs: 2000, 
-    countdownSeconds: 20 
+    countdownSeconds: 5 
 };
 
 
