@@ -89,18 +89,18 @@
     </header>
 
     <!-- 2) Right AFTER the closing </header> tag and BEFORE <main>: -->
-<div class="cyber-feed is-loading" id="cyber-feed" role="region" aria-label="Cyber security news feed">
-    <div class="cyf-label"><span class="cyf-dot" aria-hidden="true"></span><span class="cyf-label-text" id="cyf-label">CYBER FEED</span></div>
-    <div class="cyf-track">
-        <a class="cyf-title" id="cyf-title">Loading the latest security news...</a>
-        <span class="cyf-bar" aria-hidden="true"></span>
-        <span class="cyf-meta"><span class="cyf-source" id="cyf-source"></span><span id="cyf-time"></span></span>
+    <div class="cyber-feed is-loading" id="cyber-feed" role="region" aria-label="Cyber security news feed">
+        <div class="cyf-label"><span class="cyf-dot" aria-hidden="true"></span><span class="cyf-label-text" id="cyf-label">CYBER FEED</span></div>
+        <div class="cyf-track">
+            <a class="cyf-title" id="cyf-title">Loading the latest security news...</a>
+            <span class="cyf-bar" aria-hidden="true"></span>
+            <span class="cyf-meta"><span class="cyf-source" id="cyf-source"></span><span id="cyf-time"></span></span>
+        </div>
+        <div class="cyf-nav">
+            <button type="button" id="cyf-prev" aria-label="Previous headline">&lsaquo;</button>
+            <button type="button" id="cyf-next" aria-label="Next headline">&rsaquo;</button>
+        </div>
     </div>
-    <div class="cyf-nav">
-        <button type="button" id="cyf-prev" aria-label="Previous headline">&lsaquo;</button>
-        <button type="button" id="cyf-next" aria-label="Next headline">&rsaquo;</button>
-    </div>
-</div>
 
 
 
@@ -117,44 +117,49 @@
 
             <div class="hero-content">
 
-                <!-- Name -->
-                <h1 class="hero-name">Rishab Shorey</h1>
+            <!-- Name -->
+            <h1 class="hero-name">Rishab Shorey</h1>
 
-                <!-- Current position (the <em> is the red part) -->
-                <p class="hero-role">SOC Analyst L1 &nbsp;| Cyber Security Enthusiast</p>
+            <!-- Current position -->
+            <p class="hero-role">
+            <span id="typewriter"></span><span class="cursor">|</span>
+            </p>
 
-                <!-- Terminal window (green frame is drawn behind it by .terminal-frame::before) -->
-                <div class="terminal-frame">
-                    <div class="term-window">
+            <!-- Terminal window (green frame is drawn behind it by .terminal-frame::before) -->
+            <div class="terminal-frame">
+                <div class="term-window">
 
-                        <!-- Title bar: Linux-style red / yellow / green circles + system status -->
-                        <div class="term-bar">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                            <span class="term-status">SYSTEM ONLINE <span class="status-light"></span></span>
-                        </div>
+                    <!-- Title bar: Linux-style red / yellow / green circles + system status -->
+                    <div class="term-bar">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                        <span class="term-status">SYSTEM ONLINE <span class="status-light"></span></span>
+                    </div>
 
-                        <!-- Terminal body (typed by js/home.js) -->
-                        <div class="term-body">
-                            <p class="term-cmd"><span class="term-prompt">$</span> <span id="typed-cmd">./Intro.sh</span><span
-                                    class="terminal-cursor" id="cmd-cursor">_</span></p>
+                    <!-- Terminal body (typed by js/home.js) -->
+                    <div class="term-body">
+                        <p class="term-cmd"><span class="term-prompt">$</span> <span id="typed-cmd">./Intro.sh</span><span
+                                class="terminal-cursor" id="cmd-cursor">_</span></p>
 
-                            <!-- EDIT YOUR SUMMARY HERE -->
-                            <p class="term-text" id="intro-text">
-                            Early-career Cybersecurity professional targeting SOC Analyst role, building hands-on experience in SIEM, XDR, and EDR monitoring, incident containment, alert triage, and security monitoring. Proven Practical experience with security tools including Wireshark, Splunk, Snort, and Wazuh; developed through security labs, projects, and hands-on training platforms. Focused on upskilling through practical expertise in threat detection, incident handling, SIEM rule tuning, and defensive security operations.                           
-                            </p>
+                        <!-- EDIT YOUR SUMMARY HERE -->
+                        <p class="term-text" id="intro-text">
+                        Cybersecurity Professional with experience, targeting a SOC Operations role with integrated exposure to Digital Forensics and Incident Response (DFIR). 
+                        Solid foundation in security incident triage, SIEM investigations, network monitoring, and threat analysis, developed through security labs and hands-on training platforms. 
+                        Proficient in core defensive tools including Splunk, Wazuh, Wireshark, and other OSINT tools. 
+                        Driven to strengthen technical expertise in incident investigation workflows, artifact analysis, and evidence documentation within security operations.
+                        </p>
 
-                            <!-- Download CV: put your PDF in /assets and keep the name (or change href) -->
-                            <a class="cv-btn" id="cv-btn" href="../assets/Rishab_Cyber_CV.pdf" download="Rishab_Cyber_SOC_CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
-                        </div>
+                        <!-- Download CV: put your PDF in /assets and keep the name (or change href) -->
+                        <a class="cv-btn" id="cv-btn" href="../assets/Rishab_Cyber_CV.pdf" download="Rishab_Cyber_SOC_CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
                     </div>
                 </div>
+            </div>
 
             </div>
-        </section>
+    </section>
 
-        <!-- ============ SECTION 2: SKILLS AND KNOWLEDGE (placeholder) ============ -->
+    <!-- ============ SECTION 2: SKILLS AND KNOWLEDGE (placeholder) ============ -->
 
 
     <section class="home-section" id="skills">
@@ -229,253 +234,253 @@
         </div>
 
     </div>
-</section>
+    </section>
 
-        <!-- ============ SECTION 3: CERTIFICATIONS (placeholder) ============ -->
+    <!-- ============ SECTION 3: CERTIFICATIONS (placeholder) ============ -->
 
-<section class="home-section" id="certifications">
-    <h2>Certifications</h2>
-    <br><br>
-    <div class="cert-container">
+    <section class="home-section" id="certifications">
+        <h2>Certifications</h2>
+        <br><br>
+        <div class="cert-container">
 
-        <!-- LEFT TERMINAL: completed certs (list + badges + verify button) -->
-        <div class="terminal-frame cert-frame" id="cert-terminal">
-            <div class="term-window">
-                <div class="term-bar cert-bar">
-
-                    <!-- Red / yellow / green dots (LEFT) -->
-                    <div class="term-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-
-                    <!-- BADGES (RIGHT): replace each src with your badge image path -->
-                    <div class="cert-badges">
-                        <img src="../assets/badges/sc-200.png" alt="Certification 1">
-                        <img src="../assets/badges/AZ-900.png" alt="Certification 2">
-                        <img src="../assets/badges/Google-Cybersecurity-Professional-Certificate.png" alt="Certification 3">
-                        <img src="../assets/badges/Introduction-to-Cybersecurity.png" alt="Certification 4">
-                    </div>
-                </div>
-
-                <div class="term-body">
-                    <p class="term-cmd"><span class="term-prompt">$</span> <span id="cert-cmd">./Verify_certs.sh</span></p>
-
-                    <!-- EDIT: your acquired certifications (name, issuer, year) -->
-                    <ul class="cert-done">
-                        <li><span class="cert-name">Microsoft SC-200: Security Operations Analyst</span><span class="cert-meta">Microsoft &bull; 2026</span></li>
-                        <li><span class="cert-name">Microsoft AZ-900: Azure Fundamentals</span><span class="cert-meta">Microsoft &bull; 2026</span></li>
-                        <li><span class="cert-name">Google Cybersecurity Professional</span><span class="cert-meta">Google &bull; 2023</span></li>
-                        <li><span class="cert-name">Introduction to Cybersecurity</span><span class="cert-meta">Coursera &bull; 2021</span></li>
-                    </ul>
-
-                    <!-- Button: bottom centre, with arrow -->
-                    <a class="cv-btn" id="verify-btn" href="certifications.html">Verify My Certifications <span class="btn-arrow">&gt;</span></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- RIGHT TERMINAL: certifications in progress -->
-        <div class="terminal-frame cert-frame">
-            <div class="term-window">
-                <div class="term-bar cert-bar">
-                    <div class="term-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="term-status">IN_PROGRESS.sh</span>
-                </div>
-
-                <div class="term-body">
-                    <p class="term-cmd"><span class="term-prompt">$</span> <span>./in_progress.sh</span></p>
-                    <ul class="cert-progress">
-                        <li>CompTIA Security+ <span class="cert-tag">[IN PROGRESS]</span></li>
-                        <li>TryHackMe SAL1 <span class="cert-tag">[IN PROGRESS]</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-        <!-- ============ SECTION 4: EXPERIENCE (placeholder) ============ -->
-
-<section class="home-section" id="experience">
-    <h2>Experience &amp; Education</h2>
-    <br>
-    <div class="exp-edu">
-
-        <!-- ===== LEFT (wide): EXPERIENCE ===== -->
-        <div class="exp-col">
-            <h3 class="col-title">Experience</h3>
-
-            <!-- Total years + counts (calculated automatically by JS) -->
-            <p class="exp-total">Total experience: <strong id="exp-total">--</strong></p>
-            <p class="exp-sub" id="exp-sub"></p>
-
-            <!-- Filter: Technical is the default -->
-            <div class="exp-filter" role="group" aria-label="Filter internships">
-                <button type="button" class="filter-btn is-active" data-filter="technical">Technical</button>
-                <button type="button" class="filter-btn" data-filter="management">Management</button>
-            </div>
-
-            <!-- Timeline: newest on the LEFT, oldest on the RIGHT (filled by JS) -->
-            <div class="timeline" id="timeline"></div>
-        </div>
-
-        <!-- ===== RIGHT (narrow): EDUCATION terminal ===== -->
-        <aside class="edu-col">
-            <div class="terminal-frame">
+            <!-- LEFT TERMINAL: completed certs (list + badges + verify button) -->
+            <div class="terminal-frame cert-frame" id="cert-terminal">
                 <div class="term-window">
-                    <div class="term-bar">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                        <span class="term-status">EDUCATION.sh</span>
-                    </div>
-                    <div class="term-body">
-                        <p class="term-cmd"><span class="term-prompt">$</span> <span>./education.sh</span></p>
+                    <div class="term-bar cert-bar">
 
-                        <!-- EDIT: copy this whole .edu-item block to add another degree -->
-                        <div class="edu-item">
-                            <div class="edu-head">
-                                <img class="edu-logo" src="../assets/logos/nmims.png" alt="University logo">
-                                <div>
-                                    <h4 class="edu-uni">Narsee Monjee Institute of Management Studies</h4>
-                                    <p class="edu-course">MBA.Tech</p>
-                                </div>
-                            </div>
-                            <p class="edu-duration">2020 &ndash; 2025</p>
-                            <p class="edu-desc">Integrated 5-Year course(B.Tech in Computer Science Engineering and MBA in Finance).</p>
+                        <!-- Red / yellow / green dots (LEFT) -->
+                        <div class="term-dots">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                        </div>
 
+                        <!-- BADGES (RIGHT): replace each src with your badge image path -->
+                        <div class="cert-badges">
+                            <img src="../assets/badges/sc-200.png" alt="Certification 1">
+                            <img src="../assets/badges/Az-900.png" alt="Certification 2">
+                            <img src="../assets/badges/Google-Cybersecurity-Professional-Certificate.png" alt="Certification 3">
+                            <img src="../assets/badges/Introduction-to-Cybersecurity.png" alt="Certification 4">
                         </div>
                     </div>
+
+                    <div class="term-body">
+                        <p class="term-cmd"><span class="term-prompt">$</span> <span id="cert-cmd">./Verify_certs.sh</span></p>
+
+                        <!-- EDIT: your acquired certifications (name, issuer, year) -->
+                        <ul class="cert-done">
+                            <li><span class="cert-name">Microsoft SC-200: Security Operations Analyst</span><span class="cert-meta">Microsoft &bull; 2026</span></li>
+                            <li><span class="cert-name">Microsoft AZ-900: Azure Fundamentals</span><span class="cert-meta">Microsoft &bull; 2026</span></li>
+                            <li><span class="cert-name">Google Cybersecurity Professional</span><span class="cert-meta">Google &bull; 2023</span></li>
+                            <li><span class="cert-name">Introduction to Cybersecurity</span><span class="cert-meta">Coursera &bull; 2021</span></li>
+                        </ul>
+
+                        <!-- Button: bottom centre, with arrow -->
+                        <a class="cv-btn" id="verify-btn" href="certifications.html">Verify My Certifications <span class="btn-arrow">&gt;</span></a>
+                    </div>
                 </div>
             </div>
-        </aside>
 
-    </div>
-</section>
+            <!-- RIGHT TERMINAL: certifications in progress -->
+            <div class="terminal-frame cert-frame">
+                <div class="term-window">
+                    <div class="term-bar cert-bar">
+                        <div class="term-dots">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                        </div>
+                        <span class="term-status">IN_PROGRESS.sh</span>
+                    </div>
 
-<!-- ============ SECTION: WRITEUPS (card carousel) ============ -->
-<section class="home-section" id="writeups">
-    <h2>Writeups</h2>
-    <p class="muted wr-intro">CTFs, challenges and SOC simulations: what I did, how I approached it and the steps I took.</p>
+                    <div class="term-body">
+                        <p class="term-cmd"><span class="term-prompt">$</span> <span>./in_progress.sh</span></p>
+                        <ul class="cert-progress">
+                            <li>CompTIA Security+ <span class="cert-tag">[IN PROGRESS]</span></li>
+                            <li>TryHackMe SAL1 <span class="cert-tag">[IN PROGRESS]</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-    <div class="wr-wrap" id="wr-wrap">
-        <button type="button" class="wr-arrow wr-prev" id="wr-prev" aria-label="Previous writeup">&lt;</button>
-
-        <!-- cards are inserted here by JS -->
-        <div class="wr-stage" id="wr-stage" tabindex="0" aria-roledescription="carousel" aria-label="Security writeups"></div>
-
-        <button type="button" class="wr-arrow wr-next" id="wr-next" aria-label="Next writeup">&gt;</button>
-    </div>
-
-    <div class="wr-dots" id="wr-dots"></div>
-    <a class="wr-all" href="blogs.html">View all writeups &gt;</a>
-</section>
+        </div>
+    </section>
 
 
+    <!-- ============ SECTION 4: EXPERIENCE (placeholder) ============ -->
 
-        <!-- ============ SECTION 5: CONTACT (placeholder) ============ -->
-        <section class="home-section" id="contact">
-            <h2>Contact</h2>
-            <br>
-            <br>
-            <div class="contact-container">
-                
-                <!-- LEFT TERMINAL BOX: Contact Info -->
-                <div class="terminal-frame contact-frame">
+    <section class="home-section" id="experience">
+        <h2>Experience &amp; Education</h2>
+        <br>
+        <div class="exp-edu">
+
+            <!-- ===== LEFT (wide): EXPERIENCE ===== -->
+            <div class="exp-col">
+                <h3 class="col-title">Experience</h3>
+
+                <!-- Total years + counts (calculated automatically by JS) -->
+                <p class="exp-total">Total experience: <strong id="exp-total">--</strong></p>
+                <p class="exp-sub" id="exp-sub"></p>
+
+                <!-- Filter: Technical is the default -->
+                <div class="exp-filter" role="group" aria-label="Filter internships">
+                    <button type="button" class="filter-btn is-active" data-filter="technical">Technical</button>
+                    <button type="button" class="filter-btn" data-filter="management">Management</button>
+                </div>
+
+                <!-- Timeline: newest on the LEFT, oldest on the RIGHT (filled by JS) -->
+                <div class="timeline" id="timeline"></div>
+            </div>
+
+            <!-- ===== RIGHT (narrow): EDUCATION terminal ===== -->
+            <aside class="edu-col">
+                <div class="terminal-frame">
                     <div class="term-window">
-                        <!-- Terminal Bar -->
                         <div class="term-bar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
                             <span class="dot dot-green"></span>
-                            <span class="term-status">CONTACT_INFO.sh</span>
+                            <span class="term-status">EDUCATION.sh</span>
                         </div>
-                        <!-- Terminal Body -->
                         <div class="term-body">
-                            <p class="term-cmd"><span class="term-prompt">$</span> <span>./contact-info.sh</span></p>
-                            
-                            <h3 class="contact-heading">Lets Connect</h3>
-                            
-                            <p class="term-text">
-                                I appreciate your interest in connecting with me personally. Whether it's about collaborating on a research project, discussing opportunities. Feel free to reach out via the following options:
-                            </p>
+                            <p class="term-cmd"><span class="term-prompt">$</span> <span>./education.sh</span></p>
 
-                            <!-- Links with Icons -->
-                            <div class="contact-links">
-                                <a href="mailto:rishabshorey@gmail.com" class="contact-link-item">
-                                    <svg class="contact-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                    <span>: rishabshorey2@gmail.com</span>
-                                </a>
-                                <a href="https://github.com/rshorey15" target="_blank" rel="noopener noreferrer" class="contact-link-item">
-                                    <svg class="contact-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                                    <span>: github.com/rshorey15</span>
-                                </a>
-                                <a href="https://linkedin.com/in/rshorey15" target="_blank" rel="noopener noreferrer" class="contact-link-item">
-                                    <svg class="contact-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                                    <span>: linkedin.com/in/rshorey15</span>
-                                </a>
+                            <!-- EDIT: copy this whole .edu-item block to add another degree -->
+                            <div class="edu-item">
+                                <div class="edu-head">
+                                    <img class="edu-logo" src="../assets/logos/nmims.png" alt="University logo">
+                                    <div>
+                                        <h4 class="edu-uni">Narsee Monjee Institute of Management Studies</h4>
+                                        <p class="edu-course">MBA.Tech</p>
+                                    </div>
+                                </div>
+                                <p class="edu-duration">2020 &ndash; 2025</p>
+                                <p class="edu-desc">Integrated 5-Year course(B.Tech in Computer Science Engineering and MBA in Finance).</p>
+
                             </div>
                         </div>
                     </div>
                 </div>
+            </aside>
 
-        <!-- RIGHT TERMINAL BOX: Contact Form -->
+        </div>
+    </section>
+
+    <!-- ============ SECTION: WRITEUPS (card carousel) ============ -->
+    <section class="home-section" id="writeups">
+        <h2>Writeups</h2>
+        <p class="muted wr-intro">CTFs, challenges and SOC simulations: what I did, how I approached it and the steps I took.</p>
+
+        <div class="wr-wrap" id="wr-wrap">
+            <button type="button" class="wr-arrow wr-prev" id="wr-prev" aria-label="Previous writeup">&lt;</button>
+
+            <!-- cards are inserted here by JS -->
+            <div class="wr-stage" id="wr-stage" tabindex="0" aria-roledescription="carousel" aria-label="Security writeups"></div>
+
+            <button type="button" class="wr-arrow wr-next" id="wr-next" aria-label="Next writeup">&gt;</button>
+        </div>
+
+        <div class="wr-dots" id="wr-dots"></div>
+        <a class="wr-all" href="blogs.html">View all writeups &gt;</a>
+    </section>
+
+
+
+    <!-- ============ SECTION 5: CONTACT (placeholder) ============ -->
+    <section class="home-section" id="contact">
+        <h2>Contact</h2>
+        <br>
+        <br>
+        <div class="contact-container">
+            
+            <!-- LEFT TERMINAL BOX: Contact Info -->
             <div class="terminal-frame contact-frame">
                 <div class="term-window">
+                    <!-- Terminal Bar -->
                     <div class="term-bar">
                         <span class="dot dot-red"></span>
                         <span class="dot dot-yellow"></span>
                         <span class="dot dot-green"></span>
-                        <span class="term-status">SEND_MESSAGE.sh</span>
+                        <span class="term-status">CONTACT_INFO.sh</span>
                     </div>
+                    <!-- Terminal Body -->
                     <div class="term-body">
-                        <p class="term-cmd"><span class="term-prompt">$</span> <span>./send-message.sh</span></p>
+                        <p class="term-cmd"><span class="term-prompt">$</span> <span>./contact-info.sh</span></p>
+                        
+                        <h3 class="contact-heading">Lets Connect</h3>
+                        
+                        <p class="term-text">
+                            I appreciate your interest in connecting with me personally. Whether it's about collaborating on a research project, discussing opportunities. Feel free to reach out via the following options:
+                        </p>
 
-                        <!-- Forminit inputs mapped with fi- prefixes -->
-                        <form class="contact-form" id="contact-form" data-contact-form>
-                            <div class="form-group">
-                                <label for="first-name">First Name:<span class="ct-req" aria-hidden="true">*</span></label>
-                                <input type="text" id="first-name" name="fi-sender-firstName" required maxlength="60" autocomplete="given-name" aria-describedby="first-name-err">
-                                <small class="ct-err" id="first-name-err" role="alert"></small>
-                            </div>
-                            <div class="form-group">
-                                <label for="last-name">Last Name:<span class="ct-req" aria-hidden="true">*</span></label>
-                                <input type="text" id="last-name" name="fi-sender-lastName" required maxlength="60" autocomplete="family-name" aria-describedby="last-name-err">
-                                <small class="ct-err" id="last-name-err" role="alert"></small>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number:<span class="ct-opt">(optional)</span></label>
-                                <input type="tel" id="phone" name="fi-sender-phone" maxlength="25" autocomplete="tel" aria-describedby="phone-err">
-                                <small class="ct-err" id="phone-err" role="alert"></small>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email:<span class="ct-req" aria-hidden="true">*</span></label>
-                                <input type="email" id="email" name="fi-sender-email" required maxlength="254" autocomplete="email" aria-describedby="email-err">
-                                <small class="ct-err" id="email-err" role="alert"></small>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message:<span class="ct-req" aria-hidden="true">*</span></label>
-                                <textarea id="message" name="fi-text-message" rows="4" required maxlength="2000" aria-describedby="message-err"></textarea>
-                                <small class="ct-err" id="message-err" role="alert"></small>
-                                <span class="ct-count" aria-hidden="true">0 / 2000</span>
-                            </div>
-
-                            <button type="submit" class="cv-btn send-btn">Send</button>
-                            <p class="ct-status" role="status" aria-live="polite"></p>
-                        </form>
+                        <!-- Links with Icons -->
+                        <div class="contact-links">
+                            <a href="mailto:rishabshorey@gmail.com" class="contact-link-item">
+                                <svg class="contact-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <span>: rishabshorey2@gmail.com</span>
+                            </a>
+                            <a href="https://github.com/rshorey15" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+                                <svg class="contact-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                <span>: github.com/rshorey15</span>
+                            </a>
+                            <a href="https://linkedin.com/in/rshorey15" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+                                <svg class="contact-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                <span>: linkedin.com/in/rshorey15</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+
+    <!-- RIGHT TERMINAL BOX: Contact Form -->
+        <div class="terminal-frame contact-frame">
+            <div class="term-window">
+                <div class="term-bar">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                    <span class="term-status">SEND_MESSAGE.sh</span>
+                </div>
+                <div class="term-body">
+                    <p class="term-cmd"><span class="term-prompt">$</span> <span>./send-message.sh</span></p>
+
+                    <!-- Forminit inputs mapped with fi- prefixes -->
+                    <form class="contact-form" id="contact-form" data-contact-form>
+                        <div class="form-group">
+                            <label for="first-name">First Name:<span class="ct-req" aria-hidden="true">*</span></label>
+                            <input type="text" id="first-name" name="fi-sender-firstName" required maxlength="60" autocomplete="given-name" aria-describedby="first-name-err">
+                            <small class="ct-err" id="first-name-err" role="alert"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name:<span class="ct-req" aria-hidden="true">*</span></label>
+                            <input type="text" id="last-name" name="fi-sender-lastName" required maxlength="60" autocomplete="family-name" aria-describedby="last-name-err">
+                            <small class="ct-err" id="last-name-err" role="alert"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number:<span class="ct-opt">(optional)</span></label>
+                            <input type="tel" id="phone" name="fi-sender-phone" maxlength="25" autocomplete="tel" aria-describedby="phone-err">
+                            <small class="ct-err" id="phone-err" role="alert"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:<span class="ct-req" aria-hidden="true">*</span></label>
+                            <input type="email" id="email" name="fi-sender-email" required maxlength="254" autocomplete="email" aria-describedby="email-err">
+                            <small class="ct-err" id="email-err" role="alert"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message:<span class="ct-req" aria-hidden="true">*</span></label>
+                            <textarea id="message" name="fi-text-message" rows="4" required maxlength="2000" aria-describedby="message-err"></textarea>
+                            <small class="ct-err" id="message-err" role="alert"></small>
+                            <span class="ct-count" aria-hidden="true">0 / 2000</span>
+                        </div>
+
+                        <button type="submit" class="cv-btn send-btn">Send</button>
+                        <p class="ct-status" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
         </div>
-        </section>
+    </div>
+    </section>
 
     </main>
 
