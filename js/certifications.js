@@ -13,7 +13,7 @@
    ========================================================= */
 (function () {
     const CERTS = [
-        { status: "pursuing", image: "../assets/certs/sec+.png", title: "CompTia Security+ Certification", date: "N/A",
+        { status: "completed", image: "../assets/certs/sec+.png", title: "CompTia Security+ Certification", organization: "Udemy", date: "08-11-2026",
           desc: "Cover the basics of cybersecurity, including network security, threats and vulnerabilities, access control, identity management, cryptography, and risk management.",
           details: "Write a few lines here about what this certification covered, what you practised and how it applies to SOC work.",
           skills: ["Microsoft Sentinel", "Defender XDR", "KQL", "Threat Hunting"], verify: "#" },
