@@ -20,14 +20,14 @@ window.PROJECTS_CONFIG = {
           { id: "windows-soc-kingphisher-man", category: "soc-home-lab", featured: true,
           title: "The KingPhisher-Man V 1.0", skills: ["Phishing Analysis", "Email Security"],
           summary: "KingPhisher-Man is a phishing detection and email analysis project that simulates phishing email delivery, performs automated email security analysis, and supports SOC-style investigation and response workflows.",
-          image: "soc-home-lab/Github/Windows_soc_lab/Kingfisher-Man.png",
+          image: "https://github.com/rishi-blueteam/The-KingPhisher-Man/blob/main/Kingfisher-Man.png",
           github: "https://github.com/rishi-blueteam/The-KingPhisher-Man",
           readme: "https://github.com/rishi-blueteam/The-KingPhisher-Man/blob/main/README.md" },
         
         { id: "wazuh-lab", category: "soc-home-lab", featured: true,
           title: "Windows Endpoint Monitoring", skills: ["Wazuh", "Windows Events", "File Integrity Monitoring"],
           summary: "Built a virtualized SOC home lab using Wazuh to monitor a Windows endpoint, investigate authentication failures, and detect unauthorized file modifications through centralized security monitoring.",
-          image: "soc-home-lab/Github/Linux-Home-Lab/Readme_Images/Win_Auth_FIM_Logs.png",
+          image: "https://github.com/rishi-blueteam/Windows-Endpoint-Monitoring-Wazuh-/blob/main/SOC-Home-Lab-Images/Successfull%20Login%20via%20Wazuh%20search%20in%20Wazuh.png",
           github: "https://github.com/rishi-blueteam/SOC_Home_Lab",
           readme: "https://github.com/rishi-blueteam/SOC_Home_Lab/blob/main/README.md" },             // create this README first
 
@@ -60,7 +60,7 @@ window.PROJECTS_CONFIG = {
         { id: "linkedin-banner-grabber", category: "extra-projects",
           title: "LinkedIn Banner Grabber", skills: ["HTML", "CSS"],
           summary: "This tool is designed to optimize my LinkedIn profile, ensuring a strong and professional first impression when colleagues or recruiters visit",
-          image: "extra-projects/extra-project-2/images/preview.png",
+          image: "https://github.com/rishi-blueteam/Projects_Completed/blob/main/LinkedIn%20Banner%20Creator/linkedin_banner_generator.html",
           github: "https://github.com/rishi-blueteam/Projects_Completed/tree/main/LinkedIn%20Banner%20Creator",
           readme: "https://github.com/rishi-blueteam/Projects_Completed/blob/main/LinkedIn%20Banner%20Creator/README.md" },
           
