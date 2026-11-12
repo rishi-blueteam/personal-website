@@ -159,6 +159,35 @@
         </div>
     </div>
 
+<!-- 3-Second Centered Auto-Scroll Script -->
+    <script>
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                // Only auto-scroll if the user hasn't scrolled manually yet
+                if (window.scrollY < 10) {
+                    const featured = document.getElementById("featured");
+                    if (featured) {
+                        const headerHeight = document.querySelector(".site-header")?.offsetHeight || 70;
+                        const rect = featured.getBoundingClientRect();
+                        const elementTop = rect.top + window.scrollY;
+                        
+                        // Calculate exact center offset below the sticky header
+                        const availableHeight = window.innerHeight - headerHeight;
+                        const centerOffset = Math.max(0, (availableHeight - rect.height) / 2);
+                        
+                        const targetPosition = elementTop - headerHeight - centerOffset;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                }
+            }, 3000);
+        });
+    </script>
+
+
     <script src="../js/main.js" defer></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer referrerpolicy="no-referrer"></script>
