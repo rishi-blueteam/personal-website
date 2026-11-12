@@ -16,23 +16,33 @@
         { status: "completed", image: "../assets/certs/sec+.png", title: "CompTia Security+ Certification", organization: "Udemy", date: "08-11-2026",
           desc: "Cover the basics of cybersecurity, including network security, threats and vulnerabilities, access control, identity management, cryptography, and risk management.",
           details: "Write a few lines here about what this certification covered, what you practised and how it applies to SOC work.",
-          skills: ["Microsoft Sentinel", "Defender XDR", "KQL", "Threat Hunting"], verify: "#" },
-        { status: "completed", image: "../assets/certs/sc-200.png", title: "Microsoft SC-200: Security Operations Analyst", organization:"Microsoft", date: "September 2026",
-          desc: "Threat hunting, incident response and managing a security operations environment on Microsoft's security stack.",
-          details: "Write a few lines here about what this certification covered, what you practised and how it applies to SOC work.",
-          skills: ["Microsoft Sentinel", "Defender XDR", "KQL", "Threat Hunting"], verify: "#" },
+          skills: ["Microsoft Sentinel", "Defender XDR", "KQL", "Threat Hunting"], verify: "https://www.udemy.com/certificate/UC-bb5c60f7-5a42-4413-b358-9f2863fef58a/" },
+        
+        
+          { status: "completed", image: "../assets/certs/sc-200.png", title: "Microsoft SC-200: Security Operations Analyst", organization:"Microsoft", date: "September 2026",
+          desc: "Modern threat mitigation and incident response workflows using Microsoft’s enterprise security toolset, specifically Microsoft Sentinel (SIEM) and Microsoft Defender (XDR).",
+          details: "Learned how to write advanced Kusto Query Language (KQL) queries to hunt for active threats, remediate security alerts in real time, and configure automated playbooks to defend digital infrastructure.",
+          skills: ["Microsoft Sentinel", "Defender XDR", "KQL", "Threat Hunting"], verify: "https://learn.microsoft.com/api/credentials/share/en-us/RISHABSHOREY-4980/49E581BC18274E53?sharingId=5F63C7BD39B7AED7" },
+        
+        
+        
         { status: "completed", image: "../assets/certs/az-900.png", title: "Microsoft AZ-900: Azure Fundamentals", organization:"Microsoft", date: "February 2026",
-          desc: "Core cloud concepts, Azure architecture and services, plus management and governance.",
-          details: "Write a few lines here about what this certification covered and what you took away from it.",
-          skills: ["Azure", "Cloud Concepts", "Governance"], verify: "#" },
+          desc: "Core mechanics of cloud computing, including deployment models, service types, and foundational Azure resources like virtual machines, storage accounts, and virtual networks.",
+          details: "Learned how to evaluate cloud architectural benefits like high availability and scalability, navigate Azure’s security and identity frameworks, and use cost-management tools to optimize cloud spending.",
+          skills: ["Azure", "Cloud Concepts", "Governance"], verify: "https://learn.microsoft.com/api/credentials/share/en-us/RISHABSHOREY-4980/9DD14154AE9F0CDC?sharingId=5F63C7BD39B7AED7" },
+        
+        
         { status: "completed", image: "../assets/certs/google-cyber.png", title: "Google Cybersecurity Professional", organization:"Coursera", date: "2023",
-          desc: "Short description of this certification.",
-          details: "Longer description of this certification and what you learned.",
-          skills: ["Cyber Security", "SIEM"], verify: "#" },
+          desc: "Foundational security concepts including risk management frameworks (NIST), network security protocols, and core security tools used in a modern Security Operations Center (SOC).",
+          details: "We learned how to identify assets, analyze vulnerabilities, investigate security logs, and automate routine technical tasks using Python, SQL, and Linux commands.",
+          skills: ["Cyber Security", "SIEM"], verify: "https://drive.google.com/drive/folders/1YNI8QmbczSU2BluAmPPN-Rt4RHR9uBx8?usp=sharing" },
+        
+        
         { status: "completed", image: "../assets/certs/intro-cyber.png", title: "Introduction to Cybersecurity", date: "2021", organization:"Cisco Networking Academy",
-          desc: "Short description of this certification.",
-          details: "Longer description of this certification and what you learned.",
-          skills: ["Fundamentals"], verify: "#" },
+          desc: "The global landscape of cyber threats, the economic impact of cybercrime, and the foundational principles used to protect personal and organizational data.",
+          details: "Learned to identify common malware, phishing tactics, and network vulnerabilities, while gaining a solid understanding of confidentiality, integrity, and availability (the CIA triad) to defend digital assets.",
+          skills: ["Fundamentals"], verify: "https://www.netacad.com/certificates/?issuanceId=b5b2d3f8-4400-4951-bf66-e25b7bffe8b5" },
+        
         { status: "pursuing", image: "../assets/certs/cert-5.png", title: "TryHackMe SAL1", date: "Month Year",
           desc: "Short description of this certification.",
           details: "Longer description of this certification and what you learned.",

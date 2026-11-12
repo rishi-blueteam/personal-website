@@ -4,32 +4,40 @@ window.PROJECTS_CONFIG = {
     githubOwners: ["rishi-blueteam"],  
     starAll: false,                         
     categories: [
+      { id: "threat-analysis",    label: "Threat Analysis" },
         { id: "soc-home-lab",       label: "SOC Home Lab" },
         { id: "extra-projects",     label: "Extra Projects" },
         { id: "security-plus-labs", label: "Security+ Labs" }
     ],
     items: [
         /* ---- SOC Home Lab ---- */
-        { id: "elastic-lab", category: "soc-home-lab", featured: true,
-          title: "High-Fidelity Televisory Emulation & Behavioral Analysis", skills: ["Kibana-Elastic", "SIEM", "Threat Behavior Analysis", "Incident Documentation", "Log Analysis"],
+        { id: "threat-analysis", category: "threat-analysis", featured: true,
+          title: "High-Fidelity SOC Simulation & Threat Analysis", skills: ["Threat-Detection", "Log Analysis", "SIEM"],
           summary: "The primary motive of this project was to build a Telemetry Simulation Framework capable of programmatically injecting realistic background network noise interleaved with high-fidelity adversary indicators, rather than executing hazardous live exploits.",
           image: "https://github.com/rishi-blueteam/High-Fidelity-Televisory-Emulation-Behavioral-Analysis/blob/main/Attack-Simulation/DOS-Attack/image-9.png",
           github: "https://github.com/rishi-blueteam/High-Fidelity-Televisory-Emulation-Behavioral-Analysis/tree/main",
           readme: "https://github.com/rishi-blueteam/High-Fidelity-Televisory-Emulation-Behavioral-Analysis/blob/main/README.md" },
 
           { id: "windows-soc-kingphisher-man", category: "soc-home-lab", featured: true,
-          title: "The KingPhisher-Man V 1.0", skills: ["Phishing Analysis", "Email Security"],
+          title: "The KingPhisher-Man V 1.0", skills: ["Phishing Analysis", "Email Security", "Automation"],
           summary: "KingPhisher-Man is a phishing detection and email analysis project that simulates phishing email delivery, performs automated email security analysis, and supports SOC-style investigation and response workflows.",
           image: "https://github.com/rishi-blueteam/The-KingPhisher-Man/blob/main/Kingfisher-Man.png",
           github: "https://github.com/rishi-blueteam/The-KingPhisher-Man",
           readme: "https://github.com/rishi-blueteam/The-KingPhisher-Man/blob/main/README.md" },
         
-        { id: "wazuh-lab", category: "soc-home-lab", featured: true,
-          title: "Windows Endpoint Monitoring", skills: ["Wazuh", "Windows Events", "File Integrity Monitoring"],
+        { id: "linux-lab", category: "soc-home-lab", featured: true,
+          title: "SOC-Simulator-Linux", skills: ["Phishing Analysis", "Linux-Soc-Simulator"],
           summary: "Built a virtualized SOC home lab using Wazuh to monitor a Windows endpoint, investigate authentication failures, and detect unauthorized file modifications through centralized security monitoring.",
-          image: "https://github.com/rishi-blueteam/Windows-Endpoint-Monitoring-Wazuh-/blob/main/SOC-Home-Lab-Images/Successfull%20Login%20via%20Wazuh%20search%20in%20Wazuh.png",
+          image: "https://github.com/rishi-blueteam/SOC-Simulator-Linux/blob/main/Readme_Images/image-7.png",
+          github: "https://github.com/rishi-blueteam/SOC-Simulator-Linux",
+          readme: "https://github.com/rishi-blueteam/SOC-Simulator-Linux/blob/main/README.md" },
+
+          { id: "wazuh-lab", category: "soc-home-lab", featured: false,
+          title: "Wazuh Windows Endpoint Monitoring", skills: ["Wazuh", "Windows Events", "File Integrity Monitoring"],
+          summary: "Built a virtualized SOC home lab using Wazuh to monitor a Windows endpoint, investigate authentication failures, and detect unauthorized file modifications through centralized security monitoring.",
+          image: "https://github.com/rishi-blueteam/Windows-Endpoint-Monitoring-Wazuh-/blob/main/SOC-Home-Lab-Images/image-1.png",
           github: "https://github.com/rishi-blueteam/SOC_Home_Lab",
-          readme: "https://github.com/rishi-blueteam/SOC_Home_Lab/blob/main/README.md" },             // create this README first
+          readme: "https://github.com/rishi-blueteam/SOC_Home_Lab/blob/main/README.md" },
 
 
 
@@ -71,7 +79,7 @@ window.PROJECTS_CONFIG = {
           github: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/tree/main/Lab%20Writeup%20per%20Domain/Domain%203%3A%20Malware%20Analysis",
           readme: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%203%3A%20Malware%20Analysis/Malware%20Analysis.md" },
 
-        { id: "secplus-lab-5", category: "security-plus-labs", featured: true,
+        { id: "secplus-lab-5", category: "security-plus-labs", featured: false  ,
           title: "Security Architecture and Infrastructure", skills: ["Firewall", "UFW", "Linux"],
           summary: "The objective is to simulate two systems communicating over a shared NAT network and implement firewall rules to.",
           image: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Screenshots/Domain%205/UFW%20logs%20on%20target%20machine%20noticed.png",
@@ -88,18 +96,25 @@ window.PROJECTS_CONFIG = {
             
           
           { id: "secplus-lab-7", category: "security-plus-labs",
-            title: "Data Breach Analysis", skills: ["Digital Security", "Digital Awareness", "Data Leaks"],
+            title: "Data Breaches Analysis", skills: ["Data Breach", "Digital Awareness"],
             summary: "Data leaks and breaches are a common occurrence in the digital world, and some main organization that have been breached are Facebook, LinkedIn, and Twitter, but if your data is leaked, have you been breached? Have you...",
-            image: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%208%3A%20Vulnerability%20Management/image-3.png",
-            github: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/tree/main/Lab%20Writeup%20per%20Domain/Domain%208%3A%20EASM",
-            readme: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%208%3A%20EASM/EASM.md" },
+            image: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%207%3A%20Data%20Breach/pwnd.png",
+            github: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/tree/main/Lab%20Writeup%20per%20Domain/Domain%207%3A%20Data%20Breach",
+            readme: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%207%3A%20Data%20Breach/README.md" },
+          
+          { id: "secplus-lab-9", category: "security-plus-labs",
+            title: "Local Password Security Auditor", skills: ["Password Security", "Digital Awareness", "Breach Analysis"],
+            summary: "The objective is to evaluate password strength and identify passwords that are easily guessed, commonly used, or exposed in known breaches..",
+            image: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%209%3A%20Security%20Auditing/image.png",
+            github: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/tree/main/Lab%20Writeup%20per%20Domain/Domain%209%3A%20Security%20Auditing",
+            readme: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%209%3A%20Security%20Auditing/README.md" },
 
           { id: "secplus-lab-8", category: "security-plus-labs",
             title: "EASM: External Attack Surface Management", skills: ["Vulnerability Assessment", "Understanding Attacks", "Web Application Security"],
             summary: "Being upto date with vulnerabilites",
-            image: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%208%3A%20Vulnerability%20Management/image-3.png",
+            image: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%208%3A%20EASM/image.png",
             github: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/tree/main/Lab%20Writeup%20per%20Domain/Domain%208%3A%20EASM",
-            readme: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%208%3A%20EASM/EASM.md" },
+            readme: "https://github.com/rishi-blueteam/Security_Plus_Certification-Labs/blob/main/Lab%20Writeup%20per%20Domain/Domain%208%3A%20EASM/SOCRadar_EASM_Assessment.md" },
             
           { id: "secplus-lab-6", category: "security-plus-labs",
             title: "Vulnerability Management", skills: ["Vulnerability Scanning", "OpenVas", "Risk Assessment"],

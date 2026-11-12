@@ -30,11 +30,6 @@ window.WRITEUPS_CONFIG = {
         { id: "soc-simulator", label: "SOC Simulator" },
         { id: "articles",      label: "Articles" }
     ],
-
-    /* Live view counts need a server. This page is static, so "views" above is just a number you maintain.
-       To plug in a counter service later, set viewsProvider to an object like:
-         { get: async (id) => number,  hit: (id) => void }
-       get() updates the number on the card, hit() is called when a report is opened. */
     viewsProvider: null,
 
     items: [
