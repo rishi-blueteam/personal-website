@@ -1,4 +1,4 @@
-# R_lgnd Personal Website v2
+# R_SecOps Personal Website v2
 
 ## Structure
 - `html/landing.html` — intro screen
